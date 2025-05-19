@@ -24,10 +24,10 @@ export function PricingSection({
   description = "Plans designed for every stage of your esports journey.",
   tiers = [
     {
-      name: "Aspiring Player",
+      name: "Free",
       price: {
-        monthly: "€9.99",
-        yearly: "€99",
+        monthly: "free",
+        yearly: "free",
       },
       description: "Perfect for players looking to get noticed.",
       features: ["Basic profile", "ESV score", "Performance tracking", "Limited team discovery", "Community access"],
@@ -36,8 +36,8 @@ export function PricingSection({
     {
       name: "Professional",
       price: {
-        monthly: "€19.99",
-        yearly: "€199",
+        monthly: "€16.99",
+        yearly: "€169.99",
       },
       description: "For serious players and professionals.",
       features: [
@@ -51,25 +51,6 @@ export function PricingSection({
       ],
       cta: "Get Started",
       highlighted: true,
-    },
-    {
-      name: "Team/Organization",
-      price: {
-        monthly: "€99.99",
-        yearly: "€999",
-      },
-      description: "For teams looking to discover talent.",
-      features: [
-        "Multiple user accounts",
-        "Advanced scouting tools",
-        "Player comparison",
-        "Unlimited searches",
-        "Contract management",
-        "Transfer facilitation",
-        "API access",
-        "Dedicated support",
-      ],
-      cta: "Contact Sales",
     },
   ],
 }: {
@@ -121,7 +102,7 @@ export function PricingSection({
           </motion.div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
           {tiers.map((tier, index) => (
             <motion.div
               key={index}
@@ -141,7 +122,9 @@ export function PricingSection({
                 <span className="text-4xl font-bold text-neutral-900 dark:text-white">
                   {annual ? tier.price.yearly : tier.price.monthly}
                 </span>
-                <span className="text-neutral-500 dark:text-white/40 ml-1">/month</span>
+                <span className="text-neutral-500 dark:text-white/40 ml-1">
+                  {tier.price.monthly === "free" ? "" : "/month"}
+                </span>
               </div>
               <p className="text-neutral-600 dark:text-white/40 mb-6">{tier.description}</p>
 

@@ -1,14 +1,14 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Pacifico } from "next/font/google"
+import { Orbitron } from "next/font/google"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 
-const pacifico = Pacifico({
+const orbitron = Orbitron({
   subsets: ["latin"],
-  weight: ["400"],
-  variable: "--font-pacifico",
+  weight: ["400", "500", "600", "700", "800", "900"],
+  variable: "--font-orbitron",
 })
 
 function FloatingShape({
@@ -178,7 +178,8 @@ export function HeroSection({
               <span
                 className={cn(
                   "bg-clip-text text-transparent bg-gradient-to-r from-violet-500 via-violet-600 to-emerald-500 dark:from-violet-300 dark:via-white/90 dark:to-emerald-300",
-                  pacifico.className,
+                  orbitron.className,
+                  "tracking-wider uppercase font-bold",
                 )}
               >
                 {title2}

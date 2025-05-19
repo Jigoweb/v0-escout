@@ -299,7 +299,7 @@ export default function LandingPage() {
           <PricingSection
             title="Simple, Transparent Pricing"
             subtitle="Choose Your Plan"
-            description="Flexible options for players, teams, and organizations of all sizes."
+            description="Flexible options for players at every stage of their esports journey."
             tiers={[
               {
                 name: "Player Basic",
@@ -335,25 +335,6 @@ export default function LandingPage() {
                 ],
                 cta: "Start Free Trial",
                 highlighted: true,
-              },
-              {
-                name: "Team Scout",
-                price: {
-                  monthly: "$99.99",
-                  yearly: "$84.99",
-                },
-                description: "For professional teams and organizations.",
-                features: [
-                  "Everything in Player Pro",
-                  "Up to 5 scout accounts",
-                  "Advanced player search filters",
-                  "Team compatibility analysis",
-                  "Unlimited player outreach",
-                  "Custom recruitment pipeline",
-                  "API access",
-                  "Dedicated account manager",
-                ],
-                cta: "Contact Sales",
               },
             ]}
           />

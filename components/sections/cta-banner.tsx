@@ -61,7 +61,7 @@ export function CTABanner({
         <div
           className={cn(
             "flex flex-col md:flex-row md:items-center",
-            isFloating ? "md:justify-between gap-8" : "md:justify-center text-center",
+            isFloating ? "md:justify-between gap-8" : "md:justify-center text-left",
           )}
         >
           <motion.div
@@ -69,7 +69,7 @@ export function CTABanner({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className={cn("mb-6 md:mb-0", isFloating ? "md:max-w-md" : "md:max-w-2xl md:text-center")}
+            className={cn("mb-6 md:mb-0", isFloating ? "md:max-w-md" : "md:max-w-2xl md:text-left")}
           >
             <h2
               className={cn("font-bold text-white mb-3", isFloating ? "text-2xl md:text-3xl" : "text-3xl md:text-4xl")}
@@ -86,7 +86,7 @@ export function CTABanner({
             transition={{ duration: 0.6, delay: 0.2 }}
             className={cn(
               "flex gap-4",
-              isFloating ? "flex-row" : "flex-col sm:flex-row",
+              isFloating ? "flex-col sm:flex-row" : "flex-col sm:flex-row",
               !isFloating && "justify-center",
             )}
           >
