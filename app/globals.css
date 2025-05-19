@@ -1,0 +1,212 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+
+    --primary: 240 5.9% 10%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 240 10% 3.9%;
+
+    --radius: 0.5rem;
+
+    /* Custom theme colors */
+    --page-background: 0 0% 98%;
+    --page-foreground: 240 10% 3.9%;
+
+    --gradient-1: 270 76% 53%;
+    --gradient-2: 160 84% 39%;
+
+    --card-bg: 0 0% 100%;
+    --card-bg-hover: 240 5% 96%;
+    --card-border: 240 5% 84%;
+
+    --section-bg: 0 0% 96%;
+    --section-alt-bg: 0 0% 94%;
+  }
+
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 5.9% 10%;
+
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+
+    /* Custom theme colors */
+    --page-background: 240 10% 1.2%;
+    --page-foreground: 0 0% 98%;
+
+    --gradient-1: 270 76% 53%;
+    --gradient-2: 160 84% 39%;
+
+    --card-bg: 240 10% 3.9%;
+    --card-bg-hover: 240 5% 7%;
+    --card-border: 240 5% 10%;
+
+    --section-bg: 240 10% 3%;
+    --section-alt-bg: 240 10% 2%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+/* Theme transition */
+* {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 200ms;
+}
+
+/* Light mode styles */
+.light .bg-\[\#030303\] {
+  background-color: rgb(250 250 250);
+}
+
+.light .bg-\[\#050505\] {
+  background-color: rgb(245 245 245);
+}
+
+/* Fix for gradient backgrounds - avoid using @apply with gradients */
+.light .bg-gradient-to-b.from-\[\#030303\].to-\[\#050505\] {
+  background-image: linear-gradient(to bottom, rgb(250 250 250), rgb(245 245 245));
+}
+
+.light .bg-gradient-to-b.from-\[\#050505\].to-\[\#030303\] {
+  background-image: linear-gradient(to bottom, rgb(245 245 245), rgb(250 250 250));
+}
+
+.light .text-white {
+  color: rgb(23 23 23);
+}
+
+.light .text-white\/40 {
+  color: rgb(82 82 82);
+}
+
+.light .text-white\/60 {
+  color: rgb(64 64 64);
+}
+
+.light .text-white\/70 {
+  color: rgb(38 38 38);
+}
+
+.light .text-white\/80 {
+  color: rgb(23 23 23);
+}
+
+.light .border-white\/\[0\.05\] {
+  border-color: rgb(229 229 229);
+}
+
+.light .border-white\/\[0\.1\] {
+  border-color: rgb(212 212 212);
+}
+
+.light .bg-white\/\[0\.03\] {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.light .bg-white\/\[0\.05\] {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.light .bg-white\/\[0\.06\] {
+  background-color: rgb(255 255 255);
+}
+
+.light .hover\:bg-white\/\[0\.05\]:hover {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.light .hover\:bg-white\/\[0\.1\]:hover {
+  background-color: rgb(255 255 255);
+}
+
+.light .hover\:border-white\/\[0\.1\]:hover {
+  border-color: rgb(212 212 212);
+}
+
+/* Fix for buttons with white text on white background in light mode */
+.light .border-white\/10.text-white\/70 {
+  border-color: rgb(212 212 212);
+  color: rgb(38 38 38);
+}
+
+.light .border-white\/10.text-white\/70.hover\:text-white {
+  border-color: rgb(212 212 212);
+  color: rgb(38 38 38);
+}
+
+.light .border-white\/10.text-white\/70.hover\:text-white:hover {
+  color: rgb(23 23 23);
+}
+
+.light .hover\:bg-white\/5:hover {
+  background-color: rgb(243 244 246);
+}
+
+/* Fix for fullscreen button in video component */
+.light button.border-white\/10.text-white\/70 {
+  border-color: rgb(212 212 212);
+  color: rgb(38 38 38);
+}
+
+.light button.border-white\/10.text-white\/70:hover {
+  color: rgb(23 23 23);
+  background-color: rgb(243 244 246);
+}
