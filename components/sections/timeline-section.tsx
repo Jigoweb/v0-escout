@@ -2,7 +2,8 @@
 
 import type React from "react"
 
-import { motion } from "framer-motion"
+import { useRef } from "react"
+import { motion, useScroll, useTransform } from "framer-motion"
 import { cn } from "@/lib/utils"
 import { Calendar, CheckCircle, Clock, Flag, Star, Zap } from "lucide-react"
 
@@ -118,6 +119,9 @@ export function TimelineSection({
     }
   }
 
+  // Reference for the timeline container
+  const timelineRef = useRef<HTMLDivElement>(null)
+
   return (
     <section className="py-24 bg-[#030303]">
       <div className="container mx-auto px-4 md:px-6">
@@ -136,9 +140,12 @@ export function TimelineSection({
 
         {layout === "vertical" ? (
           <div className="max-w-3xl mx-auto">
-            <div className="relative">
-              {/* Vertical connector line */}
-              {showConnectors && <div className="absolute left-[27px] top-0 bottom-0 w-px bg-white/10 ml-px" />}
+            <div className="relative" ref={timelineRef}>
+              {/* Vertical connector line - static background */}
+              {showConnectors && <div className="absolute left-[27px] top-0 bottom-0 w-px bg-white/5 ml-px" />}
+
+              {/* Animated progress line */}
+              {showConnectors && <AnimatedTimelineProgress items={items} containerRef={timelineRef} type={type} />}
 
               <div className="space-y-12">
                 {items.map((item, index) => {
@@ -164,16 +171,6 @@ export function TimelineSection({
                         >
                           <div className={cn(`${colors.icon}`)}>{item.icon}</div>
                         </div>
-
-                        {/* Connector to next item */}
-                        {showConnectors && index < items.length - 1 && (
-                          <div
-                            className={cn(
-                              "absolute left-1/2 top-14 bottom-0 w-px h-[calc(100%-3.5rem)]",
-                              `${colors.connector}`,
-                            )}
-                          />
-                        )}
                       </div>
 
                       {/* Content */}
@@ -202,9 +199,12 @@ export function TimelineSection({
         ) : (
           <div className="w-full overflow-x-auto pb-8">
             <div className="min-w-max">
-              <div className="relative flex items-start space-x-8 px-4">
+              <div className="relative flex items-start space-x-8 px-4" ref={timelineRef}>
                 {/* Horizontal connector line */}
                 {showConnectors && <div className="absolute left-0 right-0 top-[27px] h-px bg-white/10" />}
+
+                {/* Animated horizontal progress line */}
+                {showConnectors && <AnimatedHorizontalProgress items={items} type={type} containerRef={timelineRef} />}
 
                 {items.map((item, index) => {
                   const colors = getStatusColors(item.status, item.highlight)
@@ -229,11 +229,6 @@ export function TimelineSection({
                         >
                           <div className={cn(`${colors.icon}`)}>{item.icon}</div>
                         </div>
-
-                        {/* Connector to next item */}
-                        {showConnectors && index < items.length - 1 && (
-                          <div className={cn("absolute left-14 top-1/2 w-8 h-px", `${colors.connector}`)} />
-                        )}
                       </div>
 
                       {/* Content */}
@@ -262,5 +257,79 @@ export function TimelineSection({
         )}
       </div>
     </section>
+  )
+}
+
+// Component for the animated vertical progress line
+function AnimatedTimelineProgress({
+  items,
+  containerRef,
+  type,
+}: {
+  items: TimelineItem[]
+  containerRef: React.RefObject<HTMLDivElement>
+  type: "history" | "roadmap"
+}) {
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start center", "end center"], // Changed offset for better trigger points
+  })
+
+  // Use scroll progress directly instead of static calculation
+  const progressHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"])
+
+  // Determine the gradient based on the timeline type
+  const gradientClass =
+    type === "history"
+      ? "bg-gradient-to-b from-emerald-500 via-violet-500 to-emerald-500/30"
+      : "bg-gradient-to-b from-emerald-500 via-violet-500 to-white/30"
+
+  return (
+    <motion.div
+      className={`absolute left-[27px] top-0 w-px ml-px z-[5] ${gradientClass}`}
+      style={{
+        height: progressHeight,
+        originY: 0,
+        transition: { duration: 0.3, ease: "easeOut" }, // Added transition properties
+      }}
+    />
+  )
+}
+
+// Component for the animated horizontal progress line
+function AnimatedHorizontalProgress({
+  items,
+  type,
+  containerRef, // Added containerRef parameter
+}: {
+  items: TimelineItem[]
+  type: "history" | "roadmap"
+  containerRef: React.RefObject<HTMLDivElement> // Added type
+}) {
+  const { scrollYProgress } = useScroll({
+    target: containerRef, // Use the passed ref instead of creating a new one
+    offset: ["start center", "end center"], // Changed offset for better trigger points
+  })
+
+  // Use scroll progress directly instead of static calculation
+  const progressWidth = useTransform(scrollYProgress, [0, 1], ["0%", "100%"])
+
+  // Determine the gradient based on the timeline type
+  const gradientClass =
+    type === "history"
+      ? "bg-gradient-to-r from-emerald-500 via-violet-500 to-emerald-500/30"
+      : "bg-gradient-to-r from-emerald-500 via-violet-500 to-white/30"
+
+  return (
+    <div className="absolute left-0 right-0 top-[27px] h-px z-[5]">
+      <motion.div
+        className={`h-full ${gradientClass}`}
+        style={{
+          width: progressWidth,
+          originX: 0,
+          transition: { duration: 0.3, ease: "easeOut" }, // Added transition properties
+        }}
+      />
+    </div>
   )
 }
