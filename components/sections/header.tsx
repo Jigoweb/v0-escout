@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
+// Import directly from the component file
 import { ThemeToggle } from "@/components/theme/theme-toggle"
 
 interface NavItem {

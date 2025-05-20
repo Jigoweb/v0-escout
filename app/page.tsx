@@ -45,7 +45,7 @@ export default function LandingPage() {
       />
       <main>
         <HeroSection
-          badge="Esports Scouting Platform"
+          badge="Revolutionizing Esports"
           title1="Discover the Next"
           title2="Esports Star"
           description="Escout is the ultimate esports scouting platform connecting talented players with professional teams through advanced analytics and AI-powered insights."

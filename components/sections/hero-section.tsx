@@ -1,15 +1,8 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Orbitron } from "next/font/google"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
-
-const orbitron = Orbitron({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800", "900"],
-  variable: "--font-orbitron",
-})
 
 function FloatingShape({
   className,
@@ -78,12 +71,12 @@ function FloatingShape({
 }
 
 export function HeroSection({
-  badge = "Revolutionizing Esports",
-  title1 = "Introducing",
-  title2 = "Escout",
-  description = "The global hub for esports scouting, where every player has a clear path to success and every team finds their perfect talent.",
-  primaryCta = "Join the Beta",
-  secondaryCta = "Learn How It Works",
+  badge,
+  title1,
+  title2,
+  description,
+  primaryCta,
+  secondaryCta,
 }: {
   badge?: string
   title1?: string
@@ -175,13 +168,7 @@ export function HeroSection({
                 {title1}
               </span>
               <br />
-              <span
-                className={cn(
-                  "bg-clip-text text-transparent bg-gradient-to-r from-violet-500 via-violet-600 to-emerald-500 dark:from-violet-300 dark:via-white/90 dark:to-emerald-300",
-                  orbitron.className,
-                  "tracking-wider uppercase font-bold",
-                )}
-              >
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-violet-500 via-violet-600 to-emerald-500 dark:from-violet-300 dark:via-white/90 dark:to-emerald-300 tracking-wider font-bold">
                 {title2}
               </span>
             </h1>

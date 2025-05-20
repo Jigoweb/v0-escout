@@ -2,10 +2,10 @@
 
 import type React from "react"
 
-import { useRef } from "react"
+import { useRef, useState } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
 import { cn } from "@/lib/utils"
-import { Calendar, CheckCircle, Clock, Flag, Star, Zap } from "lucide-react"
+import { Calendar, CheckCircle, Clock, Flag, Star, Zap, Info } from "lucide-react"
 
 interface TimelineItem {
   date: string
@@ -14,6 +14,7 @@ interface TimelineItem {
   icon?: React.ReactNode
   status?: "completed" | "current" | "upcoming"
   highlight?: boolean
+  details?: string
 }
 
 export function TimelineSection({
@@ -69,6 +70,7 @@ export function TimelineSection({
   layout = "vertical",
   type = "roadmap",
   showConnectors = true,
+  interactive = false,
 }: {
   title?: string
   subtitle?: string
@@ -77,19 +79,34 @@ export function TimelineSection({
   layout?: "vertical" | "horizontal"
   type?: "history" | "roadmap"
   showConnectors?: boolean
+  interactive?: boolean
 }) {
-  // Determine status colors based on type (history or roadmap)
-  const getStatusColors = (status: TimelineItem["status"], highlight = false) => {
+  const [activeItem, setActiveItem] = useState<number | null>(null)
+
+  // Determine status colors based on type (history or roadmap) and interactive state
+  const getStatusColors = (status: TimelineItem["status"], highlight = false, isActive = false) => {
     if (type === "history") {
       // For history, everything is in the past
       return {
         icon: highlight ? "text-emerald-400" : "text-white",
         bg: highlight
-          ? "from-violet-500/20 to-emerald-500/20"
+          ? isActive
+            ? "from-violet-500/40 to-emerald-500/30"
+            : "from-violet-500/20 to-emerald-500/20"
           : status === "current"
-            ? "from-violet-500/20 to-emerald-500/20"
-            : "from-white/10 to-white/5",
-        border: highlight ? "border-emerald-500/20" : "border-white/10",
+            ? isActive
+              ? "from-violet-500/40 to-violet-500/20"
+              : "from-violet-500/20 to-violet-500/10"
+            : isActive
+              ? "from-white/20 to-white/10"
+              : "from-white/10 to-white/5",
+        border: highlight
+          ? isActive
+            ? "border-emerald-500/40"
+            : "border-emerald-500/20"
+          : isActive
+            ? "border-white/20"
+            : "border-white/10",
         connector: highlight ? "bg-gradient-to-b from-emerald-500/50 to-violet-500/30" : "bg-white/10",
       }
     } else {
@@ -97,22 +114,22 @@ export function TimelineSection({
       if (status === "completed") {
         return {
           icon: "text-emerald-400",
-          bg: "from-emerald-500/20 to-emerald-500/10",
-          border: "border-emerald-500/20",
+          bg: isActive ? "from-emerald-500/40 to-emerald-500/20" : "from-emerald-500/20 to-emerald-500/10",
+          border: isActive ? "border-emerald-500/40" : "border-emerald-500/20",
           connector: "bg-gradient-to-b from-emerald-500/50 to-emerald-500/20",
         }
       } else if (status === "current") {
         return {
           icon: "text-violet-400",
-          bg: "from-violet-500/20 to-violet-500/10",
-          border: "border-violet-500/20",
+          bg: isActive ? "from-violet-500/40 to-violet-500/20" : "from-violet-500/20 to-violet-500/10",
+          border: isActive ? "border-violet-500/40" : "border-violet-500/20",
           connector: "bg-gradient-to-b from-violet-500/50 to-violet-500/20",
         }
       } else {
         return {
           icon: "text-white/60",
-          bg: "from-white/10 to-white/5",
-          border: "border-white/10",
+          bg: isActive ? "from-white/20 to-white/10" : "from-white/10 to-white/5",
+          border: isActive ? "border-white/20" : "border-white/10",
           connector: "bg-white/10",
         }
       }
@@ -145,11 +162,13 @@ export function TimelineSection({
               {showConnectors && <div className="absolute left-[27px] top-0 bottom-0 w-px bg-white/5 ml-px" />}
 
               {/* Animated progress line */}
-              {showConnectors && <AnimatedTimelineProgress items={items} containerRef={timelineRef} type={type} />}
+              {showConnectors && <AnimatedTimelineProgress containerRef={timelineRef} type={type} />}
 
               <div className="space-y-12">
                 {items.map((item, index) => {
-                  const colors = getStatusColors(item.status, item.highlight)
+                  const isActive = interactive && activeItem === index
+                  const colors = getStatusColors(item.status, item.highlight, isActive)
+
                   return (
                     <motion.div
                       key={index}
@@ -158,23 +177,27 @@ export function TimelineSection({
                       viewport={{ once: true }}
                       transition={{ duration: 0.6, delay: index * 0.1 }}
                       className="relative flex"
+                      onMouseEnter={() => interactive && setActiveItem(index)}
+                      onMouseLeave={() => interactive && setActiveItem(null)}
                     >
                       {/* Timeline node */}
                       <div className="relative z-10">
-                        <div
+                        <motion.div
                           className={cn(
                             "w-14 h-14 rounded-full bg-gradient-to-br flex items-center justify-center",
                             `${colors.bg}`,
                             "border-2",
                             `${colors.border}`,
+                            "transition-all duration-300",
                           )}
+                          whileHover={interactive ? { scale: 1.1 } : {}}
                         >
                           <div className={cn(`${colors.icon}`)}>{item.icon}</div>
-                        </div>
+                        </motion.div>
                       </div>
 
                       {/* Content */}
-                      <div className="ml-6 pt-1">
+                      <div className="ml-6 pt-1 flex-1">
                         <div
                           className={cn(
                             "text-sm font-medium mb-1",
@@ -187,8 +210,24 @@ export function TimelineSection({
                         >
                           {item.date}
                         </div>
-                        <h4 className="text-xl font-semibold text-white mb-2">{item.title}</h4>
+                        <h4 className="text-xl font-semibold text-white mb-2 flex items-center">
+                          {item.title}
+                          {interactive && item.details && <Info className="h-4 w-4 ml-2 text-white/40" />}
+                        </h4>
                         <p className="text-white/60">{item.description}</p>
+
+                        {/* Expanded details for interactive mode */}
+                        {interactive && isActive && item.details && (
+                          <motion.div
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: "auto" }}
+                            exit={{ opacity: 0, height: 0 }}
+                            transition={{ duration: 0.3 }}
+                            className="mt-4 p-4 bg-white/5 rounded-lg border border-white/10"
+                          >
+                            <p className="text-white/80 text-sm">{item.details}</p>
+                          </motion.div>
+                        )}
                       </div>
                     </motion.div>
                   )
@@ -204,10 +243,12 @@ export function TimelineSection({
                 {showConnectors && <div className="absolute left-0 right-0 top-[27px] h-px bg-white/10" />}
 
                 {/* Animated horizontal progress line */}
-                {showConnectors && <AnimatedHorizontalProgress items={items} type={type} containerRef={timelineRef} />}
+                {showConnectors && <AnimatedHorizontalProgress type={type} containerRef={timelineRef} />}
 
                 {items.map((item, index) => {
-                  const colors = getStatusColors(item.status, item.highlight)
+                  const isActive = interactive && activeItem === index
+                  const colors = getStatusColors(item.status, item.highlight, isActive)
+
                   return (
                     <motion.div
                       key={index}
@@ -216,19 +257,23 @@ export function TimelineSection({
                       viewport={{ once: true }}
                       transition={{ duration: 0.6, delay: index * 0.1 }}
                       className="relative flex flex-col items-center w-60"
+                      onMouseEnter={() => interactive && setActiveItem(index)}
+                      onMouseLeave={() => interactive && setActiveItem(null)}
                     >
                       {/* Timeline node */}
                       <div className="relative z-10">
-                        <div
+                        <motion.div
                           className={cn(
                             "w-14 h-14 rounded-full bg-gradient-to-br flex items-center justify-center",
                             `${colors.bg}`,
                             "border-2",
                             `${colors.border}`,
+                            "transition-all duration-300",
                           )}
+                          whileHover={interactive ? { scale: 1.1 } : {}}
                         >
                           <div className={cn(`${colors.icon}`)}>{item.icon}</div>
-                        </div>
+                        </motion.div>
                       </div>
 
                       {/* Content */}
@@ -245,8 +290,24 @@ export function TimelineSection({
                         >
                           {item.date}
                         </div>
-                        <h4 className="text-lg font-semibold text-white mb-2">{item.title}</h4>
+                        <h4 className="text-lg font-semibold text-white mb-2 flex items-center justify-center">
+                          {item.title}
+                          {interactive && item.details && <Info className="h-4 w-4 ml-2 text-white/40" />}
+                        </h4>
                         <p className="text-white/60 text-sm">{item.description}</p>
+
+                        {/* Expanded details for interactive mode */}
+                        {interactive && isActive && item.details && (
+                          <motion.div
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: "auto" }}
+                            exit={{ opacity: 0, height: 0 }}
+                            transition={{ duration: 0.3 }}
+                            className="mt-4 p-4 bg-white/5 rounded-lg border border-white/10"
+                          >
+                            <p className="text-white/80 text-sm">{item.details}</p>
+                          </motion.div>
+                        )}
                       </div>
                     </motion.div>
                   )
@@ -262,20 +323,18 @@ export function TimelineSection({
 
 // Component for the animated vertical progress line
 function AnimatedTimelineProgress({
-  items,
   containerRef,
   type,
 }: {
-  items: TimelineItem[]
   containerRef: React.RefObject<HTMLDivElement>
   type: "history" | "roadmap"
 }) {
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start center", "end center"], // Changed offset for better trigger points
+    offset: ["start center", "end center"], // Better trigger points
   })
 
-  // Use scroll progress directly instead of static calculation
+  // Use scroll progress directly for the progress line
   const progressHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"])
 
   // Determine the gradient based on the timeline type
@@ -298,20 +357,18 @@ function AnimatedTimelineProgress({
 
 // Component for the animated horizontal progress line
 function AnimatedHorizontalProgress({
-  items,
   type,
-  containerRef, // Added containerRef parameter
+  containerRef,
 }: {
-  items: TimelineItem[]
   type: "history" | "roadmap"
-  containerRef: React.RefObject<HTMLDivElement> // Added type
+  containerRef: React.RefObject<HTMLDivElement>
 }) {
   const { scrollYProgress } = useScroll({
-    target: containerRef, // Use the passed ref instead of creating a new one
-    offset: ["start center", "end center"], // Changed offset for better trigger points
+    target: containerRef,
+    offset: ["start center", "end center"], // Better trigger points
   })
 
-  // Use scroll progress directly instead of static calculation
+  // Use scroll progress directly for the progress line
   const progressWidth = useTransform(scrollYProgress, [0, 1], ["0%", "100%"])
 
   // Determine the gradient based on the timeline type

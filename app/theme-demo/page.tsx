@@ -1,6 +1,7 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
+// Import directly from the component files
 import { ThemeToggle } from "@/components/theme/theme-toggle"
 import { useTheme } from "@/components/theme/theme-provider"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"

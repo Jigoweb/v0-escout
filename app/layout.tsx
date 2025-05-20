@@ -2,6 +2,7 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
+// Import directly from the component file to avoid the index.ts issue
 import { ThemeProvider } from "@/components/theme/theme-provider"
 import { Footer } from "@/components/sections/footer"
 
