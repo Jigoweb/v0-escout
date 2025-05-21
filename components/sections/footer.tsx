@@ -5,6 +5,8 @@ import Link from "next/link"
 import { cn } from "@/lib/utils"
 import { Twitter, Mail, MapPin, Phone, Twitch, Youtube, DiscIcon as Discord } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { useTheme } from "@/components/theme/theme-provider"
+import Image from "next/image"
 
 function FloatingBubble({
   size = "md",
@@ -57,6 +59,10 @@ function FloatingBubble({
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
+  const { theme } = useTheme()
+
+  // Determine which logo to use based on theme
+  const logoSrc = theme === "dark" ? "/images/escout_logo-white.svg" : "/images/escout_logo-black.svg"
 
   return (
     <footer className="relative overflow-hidden bg-gradient-to-b from-neutral-50 to-neutral-100 dark:from-[#050505] dark:to-[#030303] border-t border-neutral-200 dark:border-white/[0.05]">
@@ -81,7 +87,15 @@ export function Footer() {
       <div className="container mx-auto px-4 py-16 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
           <div className="md:col-span-1">
-            <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-4">Escout</h3>
+            <div className="mb-4">
+              <Image
+                src={logoSrc || "/placeholder.svg"}
+                alt="Escout Logo"
+                width={120}
+                height={40}
+                className="h-6 w-auto"
+              />
+            </div>
             <p className="text-neutral-600 dark:text-white/40 mb-6">
               Connecting talented esports players with professional opportunities through advanced analytics and
               AI-powered insights.
