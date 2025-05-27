@@ -168,7 +168,7 @@ export function HeroSection({
                 {title1}
               </span>
               <br />
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-violet-500 via-violet-600 to-emerald-500 dark:from-violet-300 dark:via-white/90 dark:to-emerald-300 tracking-wider font-bold">
+              <span className="font-['BLACKHAWK'] text-neutral-900 dark:text-white text-5xl sm:text-7xl md:text-8xl tracking-wider">
                 {title2}
               </span>
             </h1>
