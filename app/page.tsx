@@ -1,5 +1,6 @@
 import { Header } from "@/components/sections/header"
 import { HeroSection } from "@/components/sections/hero-section"
+import WhosForSection from "@/components/sections/whos-for-section";
 import { LogoShowcase } from "@/components/sections/logo-showcase"
 import { FeaturesSection } from "@/components/sections/features-section"
 import { StatsSection } from "@/components/sections/stats-section"
@@ -52,6 +53,7 @@ export default function LandingPage() {
           primaryCta="Start Scouting"
           secondaryCta="Learn More"
         />
+        <WhosForSection />
         <LogoShowcase
           variant="marquee"
           title="Trusted by Top Esports Organizations"
