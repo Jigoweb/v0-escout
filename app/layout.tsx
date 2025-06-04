@@ -23,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <ThemeProvider defaultTheme="system" storageKey="theme-preference">
+        <ThemeProvider defaultTheme="dark" storageKey="theme-preference">
           {children}
           <Footer />
         </ThemeProvider>
