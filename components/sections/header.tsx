@@ -5,8 +5,9 @@ import { motion, AnimatePresence } from "framer-motion"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
-// Import directly from the component file
 import { ThemeToggle } from "@/components/theme/theme-toggle"
+import { useTheme } from "@/components/theme/theme-provider"
+import Image from "next/image"
 
 interface NavItem {
   label: string
@@ -14,7 +15,6 @@ interface NavItem {
 }
 
 export function Header({
-  logo = "ESCOUT.GG",
   navItems = [
     { label: "Features", href: "#features" },
     { label: "For Players", href: "#for-players" },
@@ -25,12 +25,12 @@ export function Header({
   ],
   ctaLabel = "Join the Beta",
 }: {
-  logo?: string
   navItems?: NavItem[]
   ctaLabel?: string
 }) {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const { theme } = useTheme()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -40,6 +40,9 @@ export function Header({
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
+
+  // Determine which logo to use based on theme
+  const logoSrc = theme === "dark" ? "/images/escout_logo-white.svg" : "/images/escout_logo-black.svg"
 
   return (
     <header
@@ -53,7 +56,14 @@ export function Header({
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex items-center justify-between">
           <a href="#" className="text-xl font-bold text-neutral-900 dark:text-white">
-            {logo}
+            <Image
+              src={logoSrc || "/placeholder.svg"}
+              alt="Escout Logo"
+              width={120}
+              height={40}
+              className="h-6 w-auto"
+              priority
+            />
           </a>
 
           {/* Desktop Navigation */}
