@@ -66,7 +66,7 @@ export function HeroSection({
                 {title1}
               </span>
               <br />
-              <span className="font-['BLACKHAWK'] text-neutral-900 dark:text-white text-5xl sm:text-7xl md:text-8xl tracking-wider">
+              <span className="font-blackhawk font-normal text-neutral-900 dark:text-white text-5xl sm:text-7xl md:text-8xl tracking-wider">
                 {title2}
               </span>
             </h1>
