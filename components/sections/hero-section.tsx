@@ -99,6 +99,22 @@ export function HeroSection({
               {secondaryCta}
             </Button>
           </motion.div>
+
+          <motion.div
+            custom={4} // New animation item
+            variants={fadeUpVariants}
+            initial="hidden"
+            animate="visible"
+            className="mt-12 md:mt-16 flex justify-center"
+          >
+            <Image
+              src="/images/hero-characters.png"
+              alt="Hero Characters"
+              width={480} // Adjust width as needed, this is a placeholder
+              height={135} // Adjust height as needed, this is a placeholder
+              quality={90}
+            />
+          </motion.div>
         </div>
       </div>
 
