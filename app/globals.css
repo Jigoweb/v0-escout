@@ -218,3 +218,13 @@
   color: rgb(23 23 23);
   background-color: rgb(243 244 246);
 }
+
+/* Force pure white text in light theme for CTA labels */
+.light .text-white-fixed {
+  color: #ffffff;
+}
+
+/* In dark theme, inherit default (already white in most cases) */
+.dark .text-white-fixed {
+  color: inherit;
+}

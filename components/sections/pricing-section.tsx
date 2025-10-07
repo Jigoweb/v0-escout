@@ -144,8 +144,11 @@ export function PricingSection({
                     ? "bg-gradient-to-r from-violet-500 to-emerald-500 hover:from-violet-600 hover:to-emerald-600 text-white border-0"
                     : "bg-neutral-100 hover:bg-neutral-200 text-neutral-800 dark:bg-white/[0.05] dark:hover:bg-white/[0.1] dark:text-white dark:border-white/[0.1]",
                 )}
+                asChild
               >
-                {tier.cta}
+                <a href="https://hh-escout.vercel.app/sign-in">
+                  <span className={cn(tier.highlighted && "text-white-fixed")}>{tier.cta}</span>
+                </a>
               </Button>
             </motion.div>
           ))}

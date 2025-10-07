@@ -79,8 +79,13 @@ export function Header({
             ))}
             <div className="flex items-center space-x-4">
               <ThemeToggle />
-              <Button className="bg-gradient-to-r from-violet-500 to-emerald-500 hover:from-violet-600 hover:to-emerald-600 text-white border-0">
-                {ctaLabel}
+              <Button
+                className="bg-gradient-to-r from-violet-500 to-emerald-500 hover:from-violet-600 hover:to-emerald-600 text-white border-0"
+                asChild
+              >
+                <a href="https://hh-escout.vercel.app/sign-in">
+                  <span className="text-white-fixed">{ctaLabel}</span>
+                </a>
               </Button>
             </div>
           </nav>
@@ -118,9 +123,11 @@ export function Header({
                 ))}
                 <Button
                   className="bg-gradient-to-r from-violet-500 to-emerald-500 hover:from-violet-600 hover:to-emerald-600 text-white border-0 w-full"
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  asChild
                 >
-                  {ctaLabel}
+                  <a href="https://hh-escout.vercel.app/sign-in">
+                    <span className="text-white-fixed">{ctaLabel}</span>
+                  </a>
                 </Button>
               </nav>
             </div>

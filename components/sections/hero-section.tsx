@@ -39,9 +39,10 @@ export function HeroSection({
         src="/images/hero-background.jpg"
         alt="Hero Background"
         fill
-        style={{ objectFit: "cover" }}
+        priority
+        sizes="100vw"
         quality={100}
-        className="absolute inset-0 z-0"
+        style={{ objectFit: "cover" }}
       />
       {/* Removed gradient div */}
 
@@ -88,15 +89,19 @@ export function HeroSection({
             <Button
               size="lg"
               className="bg-gradient-to-r from-violet-500 to-emerald-500 hover:from-violet-600 hover:to-emerald-600 text-white border-0"
+              asChild
             >
-              {primaryCta}
+              <a href="https://hh-escout.vercel.app/sign-in">
+                <span className="text-white-fixed">{primaryCta}</span>
+              </a>
             </Button>
             <Button
               size="lg"
               variant="outline"
               className="border-neutral-300 text-neutral-700 hover:text-neutral-900 hover:bg-neutral-100 dark:border-white/10 dark:text-white/70 dark:hover:text-white dark:hover:bg-white/5"
+              asChild
             >
-              {secondaryCta}
+              <a href="https://hh-escout.vercel.app/sign-in">{secondaryCta}</a>
             </Button>
           </motion.div>
 
@@ -107,13 +112,16 @@ export function HeroSection({
             animate="visible"
             className="mt-12 md:mt-16 flex justify-center"
           >
-            <Image
-              src="/images/hero-characters.png"
-              alt="Hero Characters"
-              width={480} // Adjust width as needed, this is a placeholder
-              height={135} // Adjust height as needed, this is a placeholder
-              quality={90}
-            />
+            <div className="relative w-[480px] h-[135px]">
+              <Image
+                src="/images/hero-characters.png"
+                alt="Hero Characters"
+                fill
+                priority
+                style={{ objectFit: "contain" }}
+                quality={90}
+              />
+            </div>
           </motion.div>
         </div>
       </div>

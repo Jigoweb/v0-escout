@@ -34,7 +34,6 @@ export default function LandingPage() {
   return (
     <>
       <Header
-        logo="Escout"
         navItems={[
           { label: "Features", href: "#features" },
           { label: "How It Works", href: "#how-it-works" },
@@ -296,6 +295,8 @@ export default function LandingPage() {
           description="Join thousands of players and teams already using Escout to connect talent with opportunity."
           primaryCta="Get Started"
           secondaryCta="Schedule Demo"
+          primaryCtaLink="https://hh-escout.vercel.app/sign-in"
+          secondaryCtaLink="https://hh-escout.vercel.app/sign-in"
         />
         <div id="pricing">
           <PricingSection
@@ -419,6 +420,8 @@ export default function LandingPage() {
           description="Join thousands of players already discovered through Escout."
           primaryCta="Create Your Profile"
           secondaryCta="Explore Success Stories"
+          primaryCtaLink="https://hh-escout.vercel.app/sign-in"
+          secondaryCtaLink="https://hh-escout.vercel.app/sign-in"
         />
         <div id="newsletter">
           <NewsletterSection

@@ -99,7 +99,7 @@ export function CTABanner({
               asChild
             >
               <a href={primaryCtaLink}>
-                <span>{primaryCta}</span>
+                <span className="text-white-fixed">{primaryCta}</span>
                 <ArrowRight className="ml-2 h-4 w-4" />
               </a>
             </Button>
