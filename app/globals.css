@@ -102,6 +102,87 @@
   }
 }
 
+/* Header background gradient (performance-optimized, no image fetch) */
+@layer components {
+  .header-bg {
+    position: relative;
+    overflow: hidden;
+  }
+  .header-bg::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    /* Multi-layer gradient approximating the provided artwork */
+    background-image:
+      radial-gradient(800px 320px at 15% 0%, hsl(var(--gradient-2) / 0.35), transparent 60%),
+      radial-gradient(700px 280px at 85% 0%, hsl(var(--gradient-1) / 0.35), transparent 60%),
+      radial-gradient(900px 600px at 50% 45%, hsl(220 60% 12% / 0.55), transparent 70%),
+      linear-gradient(to bottom, hsl(230 30% 6% / 0.35), hsl(230 30% 6% / 0.6));
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+  }
+  .dark .header-bg::before {
+    /* Slightly stronger glow in dark for contrast */
+    background-image:
+      radial-gradient(800px 320px at 15% 0%, hsl(var(--gradient-2) / 0.45), transparent 60%),
+      radial-gradient(700px 280px at 85% 0%, hsl(var(--gradient-1) / 0.45), transparent 60%),
+      radial-gradient(900px 600px at 50% 45%, hsl(220 60% 10% / 0.6), transparent 70%),
+      linear-gradient(to bottom, hsl(230 30% 5% / 0.4), hsl(230 30% 5% / 0.7));
+  }
+
+  /* Hero background gradient with stronger center glow */
+  .hero-bg {
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+      radial-gradient(1000px 700px at 50% 45%, hsl(200 70% 40% / 0.55), transparent 70%),
+      radial-gradient(800px 320px at 12% 0%, hsl(var(--gradient-2) / 0.40), transparent 60%),
+      radial-gradient(700px 280px at 88% 0%, hsl(var(--gradient-1) / 0.40), transparent 60%),
+      linear-gradient(to bottom, hsl(230 30% 6% / 0.35), hsl(230 30% 6% / 0.65));
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+  }
+  .dark .hero-bg::before {
+    background-image:
+      radial-gradient(1000px 700px at 50% 45%, hsl(200 70% 45% / 0.6), transparent 70%),
+      radial-gradient(800px 320px at 12% 0%, hsl(var(--gradient-2) / 0.48), transparent 60%),
+      radial-gradient(700px 280px at 88% 0%, hsl(var(--gradient-1) / 0.48), transparent 60%),
+      linear-gradient(to bottom, hsl(230 30% 5% / 0.4), hsl(230 30% 5% / 0.7));
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@layer components {
+  /* Force white text for all content inside hero */
+  .hero-white-fixed, .hero-white-fixed * {
+    color: #ffffff !important;
+  }
+
+  /* Exceptions: force black text in light mode for chips/buttons inside hero */
+  .hero-white-fixed .force-black-light {
+    color: #000000 !important;
+  }
+  .dark .hero-white-fixed .force-black-light {
+    color: #ffffff !important;
+  }
+}
+
 @layer base {
   * {
     @apply border-border;
