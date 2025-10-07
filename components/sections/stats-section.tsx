@@ -213,10 +213,10 @@ function StatItem({
       transition={{ duration: 0.6, delay: index * 0.1 }}
       className="relative"
     >
-      <div className="absolute -top-4 -left-4 w-12 h-12 rounded-lg bg-gradient-to-br from-violet-100 to-emerald-100 dark:from-violet-500/20 dark:to-emerald-500/20 flex items-center justify-center">
+      <div aria-hidden="true" className="absolute -top-4 -left-4 w-12 h-12 rounded-lg bg-gradient-to-br from-violet-100 to-emerald-100 dark:from-violet-500/20 dark:to-emerald-500/20 flex items-center justify-center z-10 pointer-events-none">
         <div className="text-emerald-600 dark:text-emerald-400">{stat.icon}</div>
       </div>
-      <div className="bg-white dark:bg-white/[0.03] backdrop-blur-sm border border-neutral-200 dark:border-white/[0.05] rounded-xl p-6 pl-10 hover:bg-neutral-50 dark:hover:bg-white/[0.05] transition-all duration-300">
+      <div className="relative z-0 bg-white dark:bg-white/[0.03] backdrop-blur-sm border border-neutral-200 dark:border-white/[0.05] rounded-xl p-6 pl-10 hover:bg-neutral-50 dark:hover:bg-white/[0.05] transition-all duration-300">
         <div className="pt-2">
           <h4 className="text-4xl font-bold text-neutral-900 dark:text-white mb-2">
             {stat.prefix}

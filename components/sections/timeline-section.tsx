@@ -159,7 +159,9 @@ export function TimelineSection({
           <div className="max-w-3xl mx-auto">
             <div className="relative" ref={timelineRef}>
               {/* Vertical connector line - static background */}
-              {showConnectors && <div className="absolute left-[27px] top-0 bottom-0 w-px bg-white/5 ml-px" />}
+              {showConnectors && (
+                <div className="absolute left-[28px] top-0 bottom-0 w-px bg-white/10 ml-px z-0 pointer-events-none" />
+              )}
 
               {/* Animated progress line */}
               {showConnectors && <AnimatedTimelineProgress containerRef={timelineRef} type={type} />}
@@ -240,7 +242,9 @@ export function TimelineSection({
             <div className="min-w-max">
               <div className="relative flex items-start space-x-8 px-4" ref={timelineRef}>
                 {/* Horizontal connector line */}
-                {showConnectors && <div className="absolute left-0 right-0 top-[27px] h-px bg-white/10" />}
+                {showConnectors && (
+                  <div className="absolute left-0 right-0 top-[28px] h-px bg-white/10 z-0 pointer-events-none" />
+                )}
 
                 {/* Animated horizontal progress line */}
                 {showConnectors && <AnimatedHorizontalProgress type={type} containerRef={timelineRef} />}
@@ -326,7 +330,7 @@ function AnimatedTimelineProgress({
   containerRef,
   type,
 }: {
-  containerRef: React.RefObject<HTMLDivElement>
+  containerRef: React.RefObject<HTMLDivElement | null>
   type: "history" | "roadmap"
 }) {
   const { scrollYProgress } = useScroll({
@@ -345,12 +349,16 @@ function AnimatedTimelineProgress({
 
   return (
     <motion.div
-      className={`absolute left-[27px] top-0 w-px ml-px z-[5] ${gradientClass}`}
+      className={`absolute left-[28px] top-0 w-px ml-px z-0 pointer-events-none ${gradientClass}`}
       style={{
         height: progressHeight,
         originY: 0,
-        transition: { duration: 0.3, ease: "easeOut" }, // Added transition properties
+        willChange: "height",
       }}
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.4, ease: "easeOut" }}
     />
   )
 }
@@ -361,7 +369,7 @@ function AnimatedHorizontalProgress({
   containerRef,
 }: {
   type: "history" | "roadmap"
-  containerRef: React.RefObject<HTMLDivElement>
+  containerRef: React.RefObject<HTMLDivElement | null>
 }) {
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -378,14 +386,18 @@ function AnimatedHorizontalProgress({
       : "bg-gradient-to-r from-emerald-500 via-violet-500 to-white/30"
 
   return (
-    <div className="absolute left-0 right-0 top-[27px] h-px z-[5]">
+    <div className="absolute left-0 right-0 top-[28px] h-px z-0 pointer-events-none">
       <motion.div
         className={`h-full ${gradientClass}`}
         style={{
           width: progressWidth,
           originX: 0,
-          transition: { duration: 0.3, ease: "easeOut" }, // Added transition properties
+          willChange: "width",
         }}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.4, ease: "easeOut" }}
       />
     </div>
   )
