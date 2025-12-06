@@ -1,52 +1,20 @@
 "use client"
 
 import type React from "react"
-
 import { motion } from "framer-motion"
-import { Award, BarChart, Database, Globe, Users, Zap } from "lucide-react"
+import Image from "next/image"
 
 interface Feature {
-  icon: React.ReactNode
   title: string
   description: string
+  image: string
 }
 
 export function FeaturesSection({
   title = "Powerful Scouting Tools",
   subtitle = "Features",
   description = "Our platform provides all the tools needed to streamline player discovery, transfers, and career development.",
-  features = [
-    {
-      icon: <Award className="h-6 w-6 z-1" />,
-      title: "ESV Score",
-      description: "Our proprietary Escout Value score provides fair and transparent player valuation.",
-    },
-    {
-      icon: <BarChart className="h-6 w-6 z-1" />,
-      title: "Data-Driven Scouting",
-      description: "Discover talent based on performance metrics, not just opinions.",
-    },
-    {
-      icon: <Database className="h-6 w-6 z-1" />,
-      title: "Transfer Regulation",
-      description: "Streamlined, transparent process for player transfers and contracts.",
-    },
-    {
-      icon: <Zap className="h-6 w-6 z-1" />,
-      title: "Unified Platform",
-      description: "One place for player profiles, team scouting, and transfer management.",
-    },
-    {
-      icon: <Users className="h-6 w-6 z-1" />,
-      title: "Career Development",
-      description: "Clear path to pro with personalized improvement recommendations.",
-    },
-    {
-      icon: <Globe className="h-6 w-6 z-1" />,
-      title: "Tournament Integration",
-      description: "Seamless connection with tournament organizers for roster submissions.",
-    },
-  ],
+  features = [],
 }: {
   title?: string
   subtitle?: string
@@ -76,7 +44,7 @@ export function FeaturesSection({
   }
 
   return (
-    <section className="py-24 bg-gradient-to-b from-neutral-50 to-neutral-100 dark:from-[#030303] dark:to-[#050505]">
+    <section className="py-24 bg-black">
       <div className="container mx-auto px-4 md:px-6">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <motion.div
@@ -85,11 +53,11 @@ export function FeaturesSection({
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            <h2 className="text-sm uppercase tracking-widest text-emerald-600 dark:text-emerald-400 mb-3">
+            <h2 className="text-sm uppercase tracking-widest text-violet-600 dark:text-violet-400 mb-3">
               {subtitle}
             </h2>
-            <h3 className="text-3xl md:text-4xl font-bold mb-6 text-neutral-900 dark:text-white">{title}</h3>
-            <p className="text-neutral-600 dark:text-white/40 text-lg">{description}</p>
+            <h3 className="text-3xl md:text-5xl font-bold mb-6 text-white uppercase">{title}</h3>
+            <p className="text-neutral-400 text-lg">{description}</p>
           </motion.div>
         </div>
 
@@ -104,13 +72,29 @@ export function FeaturesSection({
             <motion.div
               key={index}
               variants={itemVariants}
-              className="bg-white dark:bg-white/[0.03] backdrop-blur-sm border border-neutral-200 dark:border-white/[0.05] rounded-xl p-6 hover:bg-neutral-50 dark:hover:bg-white/[0.05] transition-all duration-300 shadow-sm dark:shadow-none"
+              className="relative group overflow-hidden rounded-2xl h-[400px]"
             >
-              <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-violet-100 to-emerald-100 dark:from-violet-500/20 dark:to-emerald-500/20 flex items-center justify-center mb-4">
-                <div className="text-emerald-600 dark:text-emerald-400">{feature.icon}</div>
+              {/* Background Image */}
+              <Image
+                src={feature.image}
+                alt={feature.title}
+                fill
+                className="object-cover transition-transform duration-500 group-hover:scale-110"
+                sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+              />
+              
+              {/* Overlay Gradient */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-90" />
+              
+              {/* Content */}
+              <div className="absolute inset-0 p-8 flex flex-col justify-end">
+                <h4 className="text-2xl font-bold mb-3 text-white uppercase tracking-wide drop-shadow-md">
+                  {feature.title}
+                </h4>
+                <p className="text-neutral-200 text-base leading-relaxed drop-shadow-sm font-light">
+                  {feature.description}
+                </p>
               </div>
-              <h4 className="text-xl font-semibold mb-2 text-neutral-900 dark:text-white">{feature.title}</h4>
-              <p className="text-neutral-600 dark:text-white/40">{feature.description}</p>
             </motion.div>
           ))}
         </motion.div>
@@ -118,3 +102,4 @@ export function FeaturesSection({
     </section>
   )
 }
+

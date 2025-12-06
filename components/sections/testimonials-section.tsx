@@ -49,7 +49,7 @@ export function TestimonialsSection({
   testimonials?: Testimonial[]
 }) {
   return (
-    <section className="py-24 bg-neutral-100 dark:bg-[#050505]">
+    <section className="py-24 bg-black">
       <div className="container mx-auto px-4 md:px-6">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <motion.div
@@ -58,53 +58,51 @@ export function TestimonialsSection({
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-sm uppercase tracking-widest text-emerald-600 dark:text-emerald-400 mb-3">
+            <h2 className="text-sm uppercase tracking-widest text-cyan-400 mb-3">
               {subtitle}
             </h2>
-            <h3 className="text-3xl md:text-4xl font-bold mb-6 text-neutral-900 dark:text-white">{title}</h3>
-            <p className="text-neutral-600 dark:text-white/40 text-lg">{description}</p>
+            <h3 className="text-4xl md:text-5xl font-bold mb-6 text-white uppercase">{title}</h3>
+            <p className="text-white/70 text-lg">{description}</p>
           </motion.div>
         </div>
+      </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {testimonials.map((testimonial, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="bg-white dark:bg-white/[0.03] backdrop-blur-sm border border-neutral-200 dark:border-white/[0.05] rounded-xl p-8 relative shadow-sm dark:shadow-none"
-            >
-              <div className="absolute -top-4 -left-4 w-8 h-8 rounded-full bg-gradient-to-r from-violet-500 to-emerald-500 flex items-center justify-center">
-                <Quote className="h-4 w-4 text-white" />
-              </div>
-
-              <p className="text-neutral-700 dark:text-white/70 mb-6 italic">&ldquo;{testimonial.quote}&rdquo;</p>
-
-              <div className="flex items-center">
-                {testimonial.avatar && (
-                  <div className="mr-4">
-                    <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-neutral-200 dark:border-white/10">
-                      <Image
-                        src={testimonial.avatar || "/placeholder.svg"}
-                        alt={testimonial.author}
-                        width={48}
-                        height={48}
-                        className="object-cover"
-                      />
-                    </div>
-                  </div>
-                )}
+      {/* Background band below title */}
+      <div className="relative overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/testimonials_background.jpg"
+            alt="Testimonials Background"
+            fill
+            className="object-cover opacity-60"
+            quality={90}
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-cyan-900/80 to-purple-900/80 mix-blend-multiply" />
+          <div className="absolute inset-0 bg-black/40" />
+        </div>
+        <div className="container mx-auto px-4 md:px-6 relative z-10 py-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {testimonials.map((testimonial, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                className="bg-black/40 backdrop-blur-md border border-white/10 rounded-2xl p-8 relative shadow-xl h-full flex flex-col justify-between"
+              >
                 <div>
-                  <h4 className="font-medium text-neutral-900 dark:text-white">{testimonial.author}</h4>
-                  <p className="text-neutral-500 dark:text-white/40 text-sm">
+                  <p className="text-cyan-100 text-lg mb-8 italic leading-relaxed">&ldquo;{testimonial.quote}&rdquo;</p>
+                </div>
+                <div className="mt-auto">
+                  <h4 className="font-bold text-white text-xl mb-1">{testimonial.author}</h4>
+                  <p className="text-cyan-400 text-sm font-medium">
                     {testimonial.role}, {testimonial.company}
                   </p>
                 </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

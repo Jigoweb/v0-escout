@@ -30,7 +30,7 @@ export function CTABanner({
 }) {
   // Base styles for different variants
   const variantStyles = {
-    gradient: "bg-gradient-to-r from-violet-500/10 to-emerald-500/10 border border-white/[0.05]",
+    gradient: "relative overflow-hidden border-y border-white/10",
     solid: "bg-white/[0.03] backdrop-blur-sm border border-white/[0.05]",
     minimal: "bg-transparent border-t border-b border-white/[0.05]",
     floating:
@@ -50,18 +50,34 @@ export function CTABanner({
   return (
     <section
       className={cn(
-        "py-12",
+        "py-24 md:py-32", // Increased padding for hero-like presence
         variantStyles[variant],
         positionStyles[position],
-        isFloating && "mx-4 md:mx-8 my-8 rounded-2xl",
+        // isFloating && "mx-4 md:mx-8 my-8 rounded-2xl", // Removed margins and radius as requested
         className,
       )}
     >
-      <div className={cn("container mx-auto px-4 md:px-6", isFloating && "max-w-5xl")}>
+      {/* Background Image for Gradient Variant */}
+      {variant === "gradient" && (
+        <div className="absolute inset-0 z-0">
+          {/* Background Image */}
+          <div 
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-40 mix-blend-luminosity"
+            style={{ backgroundImage: "url('/images/banner_background.png')" }}
+          />
+          {/* Gradient Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/80 via-blue-600/80 to-purple-600/80 mix-blend-overlay opacity-90" />
+          <div className="absolute inset-0 bg-gradient-to-r from-teal-400/30 to-fuchsia-600/30 mix-blend-color-dodge" />
+          {/* Darkening overlay to ensure text readability */}
+          <div className="absolute inset-0 bg-black/20" />
+        </div>
+      )}
+
+      <div className={cn("container relative z-10 mx-auto px-4 md:px-6", isFloating && "max-w-5xl")}>
         <div
           className={cn(
             "flex flex-col md:flex-row md:items-center",
-            isFloating ? "md:justify-between gap-8" : "md:justify-center text-left",
+            isFloating ? "md:justify-between gap-8" : "justify-between items-center", // Changed to justify-between for hero layout
           )}
         >
           <motion.div
@@ -69,14 +85,19 @@ export function CTABanner({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className={cn("mb-6 md:mb-0", isFloating ? "md:max-w-md" : "md:max-w-2xl md:text-left")}
+            className={cn("mb-8 md:mb-0", isFloating ? "md:max-w-md" : "md:max-w-3xl md:text-left")}
           >
             <h2
-              className={cn("font-bold text-white mb-3", isFloating ? "text-2xl md:text-3xl" : "text-3xl md:text-4xl")}
+              className={cn(
+                "font-black text-white mb-4 uppercase leading-none", // Bold styling
+                isFloating ? "text-5xl md:text-7xl" : "text-4xl md:text-6xl"
+              )}
             >
               {title}
             </h2>
-            <p className={cn("text-white/60", isFloating ? "text-base" : "text-lg")}>{description}</p>
+            <p className={cn("text-[#39e4ff] max-w-xl", isFloating ? "text-lg font-medium" : "text-lg md:text-xl font-medium")}>
+              {description}
+            </p>
           </motion.div>
 
           <motion.div
@@ -85,38 +106,33 @@ export function CTABanner({
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
             className={cn(
-              "flex gap-4",
-              isFloating ? "flex-col sm:flex-row" : "flex-col sm:flex-row",
-              !isFloating && "justify-center",
+              "flex gap-4 shrink-0", // Prevent shrinking
+              isFloating ? "flex-col sm:flex-col items-end" : "flex-col w-full md:w-auto", // Vertical stack on desktop for hero variant
+              !isFloating && "md:ml-8", // Add spacing from text
             )}
           >
             <Button
-              size={isFloating ? "default" : "lg"}
+              size="lg"
               className={cn(
-                "bg-gradient-to-r from-violet-500 to-emerald-500 hover:from-violet-600 hover:to-emerald-600 text-white border-0",
-                isFloating ? "" : "px-8",
+                "bg-cyan-400 hover:bg-cyan-500 text-black font-bold border-0 rounded-full shadow-lg shadow-cyan-500/20 px-8 h-14 text-lg", // Custom styling for primary button
               )}
               asChild
             >
               <a href={primaryCtaLink}>
-                <span className="text-white-fixed">{primaryCta}</span>
-                <ArrowRight className="ml-2 h-4 w-4" />
+                <span className="">{primaryCta}</span>
               </a>
             </Button>
 
             {showSecondaryButton && (
               <Button
-                size={isFloating ? "default" : "lg"}
-                variant="outline"
+                size="lg"
                 className={cn(
-                  "border-white/10 text-white/70 hover:text-white hover:bg-white/5",
-                  isFloating ? "" : "px-8",
+                  "bg-cyan-400/90 hover:bg-cyan-500/90 text-black font-bold border-0 rounded-full backdrop-blur-sm px-8 h-14 text-lg", // Matching style for secondary
                 )}
                 asChild
               >
                 <a href={secondaryCtaLink}>
                   <span>{secondaryCta}</span>
-                  <ExternalLink className="ml-2 h-4 w-4" />
                 </a>
               </Button>
             )}
@@ -124,19 +140,15 @@ export function CTABanner({
         </div>
       </div>
 
-      {/* Decorative elements for gradient variant */}
-      {variant === "gradient" && !isFloating && (
-        <>
-          <div className="absolute top-0 left-1/4 w-1/2 h-px bg-gradient-to-r from-transparent via-violet-500/30 to-transparent" />
-          <div className="absolute bottom-0 left-1/4 w-1/2 h-px bg-gradient-to-r from-transparent via-emerald-500/30 to-transparent" />
-        </>
-      )}
-
-      {/* Decorative elements for floating variant */}
+      {/* Background Image for Floating Variant */}
       {isFloating && (
-        <div className="absolute inset-0 rounded-2xl overflow-hidden pointer-events-none">
-          <div className="absolute -top-24 -left-24 w-48 h-48 bg-violet-500/10 rounded-full blur-3xl" />
-          <div className="absolute -bottom-24 -right-24 w-48 h-48 bg-emerald-500/10 rounded-full blur-3xl" />
+        <div className="absolute inset-0 overflow-hidden">
+          <div
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-50 mix-blend-luminosity"
+            style={{ backgroundImage: "url('/images/banner_background_lunch.jpg')" }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/70 via-blue-600/70 to-fuchsia-600/70 mix-blend-overlay" />
+          <div className="absolute inset-0 bg-black/20" />
         </div>
       )}
     </section>

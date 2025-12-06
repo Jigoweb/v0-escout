@@ -24,36 +24,12 @@ export function VideoShowcase({
   videos = [
     {
       id: "video-1",
-      title: "Escout Overview",
-      description: "A quick overview of our platform and its key features.",
+      title: "PLAYER SUCCESS STORY: ALEX 'X' ROX",
+      description: "How a talented amateur player got discovered and signed to a professional team through Escout.",
       type: "youtube",
       url: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-      thumbnail: "/placeholder.svg?height=720&width=1280",
+      thumbnail: "/images/video_thumbnail.jpg",
       featured: true,
-    },
-    {
-      id: "video-2",
-      title: "ESV Score Explained",
-      description: "Learn how our proprietary scoring system works to value players fairly.",
-      type: "youtube",
-      url: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-      thumbnail: "/placeholder.svg?height=720&width=1280",
-    },
-    {
-      id: "video-3",
-      title: "Player Discovery",
-      description: "See how teams can find the perfect talent for their roster.",
-      type: "youtube",
-      url: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-      thumbnail: "/placeholder.svg?height=720&width=1280",
-    },
-    {
-      id: "video-4",
-      title: "Path to Pro",
-      description: "How aspiring players can get noticed by professional teams.",
-      type: "youtube",
-      url: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-      thumbnail: "/placeholder.svg?height=720&width=1280",
     },
   ],
   layout = "featured",
@@ -120,22 +96,35 @@ export function VideoShowcase({
   // Render embedded video based on type
   const renderVideo = (video: Video, inLightbox = false) => {
     const commonClasses = cn(
-      "w-full rounded-xl overflow-hidden bg-black",
+      "w-full rounded-xl overflow-hidden bg-black shadow-2xl border border-white/10",
       inLightbox ? "aspect-video max-h-[80vh]" : "aspect-video",
     )
 
     if (video.type === "youtube") {
       return (
         <div className={commonClasses}>
-          <iframe
-            src={`${video.url}${isPlaying || autoplay ? "?autoplay=1" : ""}${
-              showControls ? "" : "&controls=0"
-            }&rel=0&modestbranding=1`}
-            title={video.title}
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen={allowFullscreen}
-            className="w-full h-full"
-          />
+          {isPlaying || inLightbox ? (
+            <iframe
+              src={`${video.url}${isPlaying || autoplay ? "?autoplay=1" : ""}${
+                showControls ? "" : "&controls=0"
+              }&rel=0&modestbranding=1`}
+              title={video.title}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen={allowFullscreen}
+              className="w-full h-full"
+            />
+          ) : (
+            <div className="relative w-full h-full group cursor-pointer" onClick={() => openLightbox(video)}>
+              <Image
+                src={video.thumbnail || "/placeholder.svg"}
+                alt={video.title}
+                fill
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-300" />
+
+            </div>
+          )}
         </div>
       )
     } else if (video.type === "vimeo") {
@@ -214,46 +203,30 @@ export function VideoShowcase({
   // Render featured layout
   const renderFeaturedLayout = () => {
     return (
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <div className="lg:col-span-2">
+      <div className="w-full max-w-5xl mx-auto">
+        <div className="mb-8">
           {activeVideo && (
-            <div className="space-y-4">
+            <div className="space-y-6">
               {renderVideo(activeVideo)}
-              <div className="flex justify-between items-start">
-                <div>
-                  <h3 className="text-xl font-semibold text-white">{activeVideo.title}</h3>
-                  {activeVideo.description && <p className="text-white/60 mt-1">{activeVideo.description}</p>}
+              <div className="flex flex-row justify-between items-start gap-4">
+                <div className="flex-1 pr-4">
+                  <h3 className="text-lg md:text-2xl font-bold text-white uppercase leading-tight">{activeVideo.title}</h3>
+                  {activeVideo.description && <p className="text-white/60 mt-1 md:mt-2 text-sm md:text-lg leading-relaxed">{activeVideo.description}</p>}
                 </div>
                 {allowFullscreen && (
                   <Button
                     variant="outline"
-                    size="sm"
-                    className="border-white/10 text-white/70 hover:text-white hover:bg-white/5"
+                    size="default"
+                    className="border-white/10 bg-white/5 text-white hover:bg-white/10 hover:text-white shrink-0 h-10 w-10 md:w-auto px-0 md:px-4"
                     onClick={() => openLightbox(activeVideo)}
                   >
-                    <Maximize2 className="h-4 w-4 mr-2" />
-                    Fullscreen
+                    <Maximize2 className="h-4 w-4 md:mr-2" />
+                    <span className="hidden md:inline">Fullscreen</span>
                   </Button>
                 )}
               </div>
             </div>
           )}
-        </div>
-        <div className="space-y-4">
-          <h3 className="text-lg font-medium text-white">More Videos</h3>
-          <div className="grid grid-cols-1 gap-4 max-h-[600px] overflow-y-auto pr-2">
-            {featuredVideos.map((video) => (
-              <motion.div
-                key={video.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-              >
-                {renderThumbnail(video)}
-              </motion.div>
-            ))}
-          </div>
         </div>
       </div>
     )

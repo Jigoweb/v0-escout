@@ -24,9 +24,9 @@ interface NewsletterProps {
 }
 
 export function NewsletterSection({
-  title = "Stay Updated on Escout",
+  title = "Stay Updated on Esports Opportunities",
   subtitle = "Newsletter",
-  description = "Subscribe to receive the latest updates on our launch, new features, and esports scouting insights.",
+  description = "Subscribe to receive the latest news about tournaments, team openings, and platform features.",
   placeholder = "Enter your email",
   buttonText = "Subscribe",
   successMessage = "Thank you for subscribing! Check your email to confirm your subscription.",
@@ -76,20 +76,20 @@ export function NewsletterSection({
             onBlur={() => setTouched(true)}
             placeholder={placeholder}
             className={cn(
-              "bg-white dark:bg-white/[0.03] border-neutral-300 dark:border-white/10 text-neutral-900 dark:text-white placeholder:text-neutral-500 dark:placeholder:text-white/30 pr-10",
-              "focus-visible:ring-emerald-500 h-12",
+              "bg-transparent border-[#39e4ff] text-white placeholder:text-white/50 pr-10 rounded-md",
+              "focus-visible:ring-[#39e4ff] h-12",
               !isEmailValid && touched && "border-red-500 focus-visible:ring-red-500",
             )}
             disabled={status === "loading" || status === "success"}
           />
-          <Mail className="absolute right-3 top-1/2 -translate-y-1/2 h-5 w-5 text-neutral-400 dark:text-white/30" />
+          <Mail className="absolute right-3 top-1/2 -translate-y-1/2 h-5 w-5 text-[#39e4ff]" />
         </div>
         <Button
           type="submit"
           disabled={!canSubmit || status === "loading" || status === "success"}
           className={cn(
-            "bg-gradient-to-r from-violet-500 to-emerald-500 hover:from-violet-600 hover:to-emerald-600",
-            "text-white border-0 h-12 px-6",
+            "bg-[#39e4ff] hover:bg-[#27d4f0] text-black",
+            "rounded-md border-0 h-12 px-6",
             variant === "compact" ? "sm:w-auto" : "sm:w-auto md:w-auto",
           )}
         >
@@ -180,7 +180,7 @@ export function NewsletterSection({
 
   // Default and compact variants
   return (
-    <section className={cn("py-16 bg-white dark:bg-[#030303]", className)}>
+    <section className={cn("py-20 bg-black", className)}>
       <div className="container mx-auto px-4 md:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -190,18 +190,18 @@ export function NewsletterSection({
           className={cn("text-center", variant === "default" ? "max-w-3xl mx-auto" : "max-w-xl mx-auto")}
         >
           {variant === "default" && (
-            <h2 className="text-sm uppercase tracking-widest text-violet-600 dark:text-violet-400 mb-3">{subtitle}</h2>
+            <h2 className="text-sm uppercase tracking-widest text-[#39e4ff] mb-3">{subtitle}</h2>
           )}
           <h3
             className={cn(
-              "font-bold mb-4 text-neutral-900 dark:text-white",
-              variant === "default" ? "text-3xl md:text-4xl" : "text-2xl",
+              "font-black mb-4 text-white uppercase leading-none",
+              variant === "default" ? "text-5xl md:text-7xl" : "text-3xl",
             )}
           >
             {title}
           </h3>
           <p
-            className={cn("text-neutral-600 dark:text-white/40 mb-8", variant === "default" ? "text-lg" : "text-base")}
+            className={cn("text-white/60 mb-8", variant === "default" ? "text-lg" : "text-base")}
           >
             {description}
           </p>

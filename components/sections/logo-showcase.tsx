@@ -249,21 +249,22 @@ export function LogoShowcase({
             <div
               key={index}
               className={cn(
-                "bg-white dark:bg-white/[0.03] backdrop-blur-sm border border-neutral-200 dark:border-white/[0.05] rounded-xl p-6",
+                "bg-white dark:bg-white/[0.03] backdrop-blur-sm border border-neutral-200 dark:border-white/[0.05] rounded-xl overflow-hidden",
                 "flex items-center justify-center h-24 min-w-[200px]",
                 "transition-all duration-300 hover:bg-neutral-50 dark:hover:bg-white/[0.06] hover:border-neutral-300 dark:hover:border-white/[0.1]",
               )}
             >
-              <Image
-                src={logo.image || "/placeholder.svg"}
-                alt={logo.name}
-                width={120}
-                height={60}
-                className={cn(
-                  "max-h-12 w-auto object-contain transition-all duration-300",
-                  grayscale && "grayscale opacity-60 hover:grayscale-0 hover:opacity-100",
-                )}
-              />
+              <div className="relative w-full h-full">
+                <Image
+                  src={logo.image || "/placeholder.svg"}
+                  alt={logo.name}
+                  fill
+                  className={cn(
+                    "object-cover transition-all duration-300",
+                    // grayscale && "grayscale opacity-80 hover:grayscale-0 hover:opacity-100", // Removed B&W effect
+                  )}
+                />
+              </div>
             </div>
           ))}
 
@@ -272,21 +273,22 @@ export function LogoShowcase({
             <div
               key={`duplicate-${index}`}
               className={cn(
-                "bg-white dark:bg-white/[0.03] backdrop-blur-sm border border-neutral-200 dark:border-white/[0.05] rounded-xl p-6",
+                "bg-white dark:bg-white/[0.03] backdrop-blur-sm border border-neutral-200 dark:border-white/[0.05] rounded-xl overflow-hidden",
                 "flex items-center justify-center h-24 min-w-[200px]",
                 "transition-all duration-300 hover:bg-neutral-50 dark:hover:bg-white/[0.06] hover:border-neutral-300 dark:hover:border-white/[0.1]",
               )}
             >
-              <Image
-                src={logo.image || "/placeholder.svg"}
-                alt={logo.name}
-                width={120}
-                height={60}
-                className={cn(
-                  "max-h-12 w-auto object-contain transition-all duration-300",
-                  grayscale && "grayscale opacity-60 hover:grayscale-0 hover:opacity-100",
-                )}
-              />
+              <div className="relative w-full h-full">
+                <Image
+                  src={logo.image || "/placeholder.svg"}
+                  alt={logo.name}
+                  fill
+                  className={cn(
+                    "object-cover transition-all duration-300",
+                    // grayscale && "grayscale opacity-80 hover:grayscale-0 hover:opacity-100", // Removed B&W effect
+                  )}
+                />
+              </div>
             </div>
           ))}
         </motion.div>
@@ -305,7 +307,7 @@ export function LogoShowcase({
             transition={{ duration: 0.6 }}
           >
             <h2 className="text-sm uppercase tracking-widest text-violet-600 dark:text-violet-400 mb-3">{subtitle}</h2>
-            <h3 className="text-3xl md:text-4xl font-bold mb-6 text-neutral-900 dark:text-white">{title}</h3>
+            <h3 className="text-3xl md:text-4xl font-bold mb-6 text-neutral-900 dark:text-white uppercase">{title}</h3>
             <p className="text-neutral-600 dark:text-white/40 text-lg">{description}</p>
           </motion.div>
         </div>

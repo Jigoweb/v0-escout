@@ -5,67 +5,24 @@ import type React from "react"
 import { useEffect, useRef, useState } from "react"
 import { motion, useInView } from "framer-motion"
 import { cn } from "@/lib/utils"
-import { BarChart3, Users, Globe, Award, Building, Trophy } from "lucide-react"
+import Image from "next/image"
 
 interface Stat {
   value: number
   label: string
   prefix?: string
   suffix?: string
-  icon?: React.ReactNode
   description?: string
+  image?: string
 }
 
 export function StatsSection({
   title = "The Esports Ecosystem",
   subtitle = "Key Metrics",
   description = "Escout connects the entire esports ecosystem with powerful tools and data.",
-  stats = [
-    {
-      value: 3300,
-      label: "Gamers Worldwide",
-      suffix: "M",
-      icon: <Globe className="h-6 w-6" />,
-      description: "Total addressable market",
-    },
-    {
-      value: 640,
-      label: "Esports Fans",
-      suffix: "M",
-      icon: <Trophy className="h-6 w-6" />,
-      description: "Active & occasional esports fans",
-    },
-    {
-      value: 200,
-      label: "Aspiring Pro Players",
-      suffix: "M",
-      icon: <Users className="h-6 w-6" />,
-      description: "Players wanting to go pro",
-    },
-    {
-      value: 50,
-      label: "Professional Teams",
-      suffix: "K",
-      icon: <Building className="h-6 w-6" />,
-      description: "Teams looking for talent",
-    },
-    {
-      value: 15,
-      label: "Professional Players",
-      suffix: "K",
-      icon: <Award className="h-6 w-6" />,
-      description: "Current pro players",
-    },
-    {
-      value: 100,
-      label: "Tournament Organizers",
-      suffix: "+",
-      icon: <BarChart3 className="h-6 w-6" />,
-      description: "Organizations running competitions",
-    },
-  ],
+  stats = [],
   columns = 3,
-  variant = "default",
+  variant = "cards",
   animationDuration = 2000,
 }: {
   title?: string
@@ -77,7 +34,7 @@ export function StatsSection({
   animationDuration?: number
 }) {
   return (
-    <section className="py-24 bg-white dark:bg-[#030303]">
+    <section className="py-24 bg-black">
       <div className="container mx-auto px-4 md:px-6">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <motion.div
@@ -86,11 +43,11 @@ export function StatsSection({
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-sm uppercase tracking-widest text-emerald-600 dark:text-emerald-400 mb-3">
+            <h2 className="text-sm uppercase tracking-widest text-cyan-400 mb-3">
               {subtitle}
             </h2>
-            <h3 className="text-3xl md:text-4xl font-bold mb-6 text-neutral-900 dark:text-white">{title}</h3>
-            <p className="text-neutral-600 dark:text-white/40 text-lg">{description}</p>
+            <h3 className="text-3xl md:text-5xl font-bold mb-6 text-white uppercase">{title}</h3>
+            <p className="text-neutral-400 text-lg">{description}</p>
           </motion.div>
         </div>
 
@@ -148,62 +105,9 @@ function StatItem({
     }
   }, [isInView, stat.value, animationDuration])
 
-  // Format the number with commas
-  const formattedValue = count.toLocaleString()
+  // Format the number with dots as thousands separator
+  const formattedValue = count.toLocaleString('it-IT')
 
-  if (variant === "cards") {
-    return (
-      <motion.div
-        ref={ref}
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6, delay: index * 0.1 }}
-        className="bg-white dark:bg-white/[0.03] backdrop-blur-sm border border-neutral-200 dark:border-white/[0.05] rounded-xl p-6 hover:bg-neutral-50 dark:hover:bg-white/[0.05] transition-all duration-300 shadow-sm dark:shadow-none"
-      >
-        <div className="flex items-start">
-          <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-violet-100 to-emerald-100 dark:from-violet-500/20 dark:to-emerald-500/20 flex items-center justify-center mr-4 flex-shrink-0">
-            <div className="text-emerald-600 dark:text-emerald-400">{stat.icon}</div>
-          </div>
-          <div>
-            <h4 className="text-3xl font-bold text-neutral-900 dark:text-white mb-1">
-              {stat.prefix}
-              {formattedValue}
-              {stat.suffix}
-            </h4>
-            <p className="text-lg font-medium text-neutral-800 dark:text-white/80 mb-2">{stat.label}</p>
-            {stat.description && <p className="text-neutral-600 dark:text-white/40 text-sm">{stat.description}</p>}
-          </div>
-        </div>
-      </motion.div>
-    )
-  }
-
-  if (variant === "minimal") {
-    return (
-      <motion.div
-        ref={ref}
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6, delay: index * 0.1 }}
-        className="text-center"
-      >
-        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-violet-100 to-emerald-100 dark:from-violet-500/20 dark:to-emerald-500/20 mb-4">
-          <div className="text-emerald-600 dark:text-emerald-400">{stat.icon}</div>
-        </div>
-        <h4 className="text-4xl font-bold text-neutral-900 dark:text-white mb-2">
-          {stat.prefix}
-          {formattedValue}
-          {stat.suffix}
-        </h4>
-        <p className="text-lg font-medium text-neutral-800 dark:text-white/80 mb-1">{stat.label}</p>
-        {stat.description && <p className="text-neutral-600 dark:text-white/40 text-sm">{stat.description}</p>}
-      </motion.div>
-    )
-  }
-
-  // Default variant
   return (
     <motion.div
       ref={ref}
@@ -211,22 +115,30 @@ function StatItem({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6, delay: index * 0.1 }}
-      className="relative"
+      className="relative overflow-hidden rounded-2xl h-[200px] group"
     >
-      <div aria-hidden="true" className="absolute -top-4 -left-4 w-12 h-12 rounded-lg bg-gradient-to-br from-violet-100 to-emerald-100 dark:from-violet-500/20 dark:to-emerald-500/20 flex items-center justify-center z-10 pointer-events-none">
-        <div className="text-emerald-600 dark:text-emerald-400">{stat.icon}</div>
+      {/* Background Image with Gradient Overlay */}
+      <div className="absolute inset-0 z-0">
+        {stat.image && (
+          <Image
+            src={stat.image}
+            alt={stat.label}
+            fill
+            className="object-cover opacity-60 transition-transform duration-700 group-hover:scale-110"
+          />
+        )}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/80 to-purple-900/80 mix-blend-multiply" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
       </div>
-      <div className="relative z-0 bg-white dark:bg-white/[0.03] backdrop-blur-sm border border-neutral-200 dark:border-white/[0.05] rounded-xl p-6 pl-10 hover:bg-neutral-50 dark:hover:bg-white/[0.05] transition-all duration-300">
-        <div className="pt-2">
-          <h4 className="text-4xl font-bold text-neutral-900 dark:text-white mb-2">
-            {stat.prefix}
-            {formattedValue}
-            {stat.suffix}
-          </h4>
-          <div className="h-px w-16 bg-gradient-to-r from-violet-300 to-emerald-300 dark:from-violet-500/40 dark:to-emerald-500/40 mb-3" />
-          <p className="text-lg font-medium text-neutral-800 dark:text-white/80 mb-1">{stat.label}</p>
-          {stat.description && <p className="text-neutral-600 dark:text-white/40 text-sm">{stat.description}</p>}
-        </div>
+
+      <div className="relative z-10 h-full flex flex-col justify-center p-8">
+        <h4 className="text-5xl font-bold text-white mb-2">
+          {stat.prefix}
+          {formattedValue}
+          {stat.suffix}
+        </h4>
+        <p className="text-xl font-bold text-white mb-1">{stat.label}</p>
+        {stat.description && <p className="text-white/80 text-sm font-light">{stat.description}</p>}
       </div>
     </motion.div>
   )

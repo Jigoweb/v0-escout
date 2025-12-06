@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Mail, MessageSquare, Phone } from "lucide-react"
+import Image from "next/image"
 
 interface ContactMethod {
   icon: React.ReactNode
@@ -46,106 +47,111 @@ export function ContactSection({
   contactMethods?: ContactMethod[]
 }) {
   return (
-    <section className="py-24 bg-neutral-50 dark:bg-[#030303]">
+    <section className="py-24 bg-black">
       <div className="container mx-auto px-4 md:px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Left Card: Get In Touch */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
+            className="border border-purple-500/30 rounded-2xl p-8 md:p-12 relative overflow-hidden bg-black shadow-[0_0_30px_rgba(139,92,246,0.1)] h-full flex flex-col"
           >
-            <h2 className="text-sm uppercase tracking-widest text-violet-600 dark:text-violet-400 mb-3">{subtitle}</h2>
-            <h3 className="text-3xl md:text-4xl font-bold mb-6 text-neutral-900 dark:text-white">{title}</h3>
-            <p className="text-neutral-600 dark:text-white/40 text-lg mb-8">{description}</p>
+            <div className="relative z-10">
+              <h3 className="text-4xl md:text-5xl font-bold mb-4 text-purple-500 uppercase font-sans">{title}</h3>
+              <p className="text-neutral-400 text-base mb-1">Have questions about Escout?</p>
+              <p className="text-neutral-400 text-base mb-8">Our team is here to help players and organizations connect.</p>
 
-            <div className="space-y-6">
-              {contactMethods.map((method, index) => (
-                <div key={index} className="flex items-start">
-                  <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-violet-100 to-emerald-100 dark:from-violet-500/20 dark:to-emerald-500/20 flex items-center justify-center mr-4">
-                    <div className="text-emerald-600 dark:text-emerald-400">{method.icon}</div>
-                  </div>
-                  <div>
-                    <h4 className="font-medium text-neutral-900 dark:text-white mb-1">{method.title}</h4>
+              <div className="h-px w-full bg-purple-500/30 mb-8" />
+
+              <div className="space-y-6">
+                {contactMethods.map((method, index) => (
+                  <div key={index} className="flex items-center justify-between group">
+                    <span className="text-neutral-400 font-medium">{method.title}</span>
                     {method.link ? (
                       <a
                         href={method.link}
-                        className="text-neutral-600 hover:text-emerald-600 dark:text-white/60 dark:hover:text-emerald-400 transition-colors"
+                        className="text-purple-400 hover:text-purple-300 transition-colors font-medium"
                       >
                         {method.value}
                       </a>
                     ) : (
-                      <p className="text-neutral-600 dark:text-white/60">{method.value}</p>
+                      <span className="text-purple-400 font-medium">{method.value}</span>
                     )}
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </motion.div>
 
+          {/* Right Card: Send Us A Message */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="bg-white dark:bg-white/[0.03] backdrop-blur-sm border border-neutral-200 dark:border-white/[0.05] rounded-xl p-8 shadow-sm dark:shadow-none"
+            className="relative rounded-2xl overflow-hidden h-full"
           >
-            <h4 className="text-xl font-semibold mb-6 text-neutral-900 dark:text-white">Send us a message</h4>
-            <form className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* Background Image */}
+            <div className="absolute inset-0 z-0">
+              <Image
+                src="/images/box_contact_background.jpg"
+                alt="Contact Background"
+                fill
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-900/80 via-purple-900/60 to-black/40 mix-blend-multiply" />
+            </div>
+
+            <div className="relative z-10 p-8 md:p-12 h-full flex flex-col">
+              <h3 className="text-4xl md:text-5xl font-bold mb-8 text-white uppercase font-sans">SEND US A MESSAGE</h3>
+              
+              <form className="space-y-4 flex-grow">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <Input
+                      id="name"
+                      placeholder="Your name"
+                      className="bg-black/30 border-cyan-500/30 text-white placeholder:text-white/50 focus-visible:ring-cyan-500 h-12 rounded-lg backdrop-blur-sm"
+                    />
+                  </div>
+                  <div>
+                    <Input
+                      id="email"
+                      type="email"
+                      placeholder="Your email"
+                      className="bg-black/30 border-cyan-500/30 text-white placeholder:text-white/50 focus-visible:ring-cyan-500 h-12 rounded-lg backdrop-blur-sm"
+                    />
+                  </div>
+                </div>
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-neutral-700 dark:text-white/60 mb-1">
-                    Name
-                  </label>
                   <Input
-                    id="name"
-                    placeholder="Your name"
-                    className="bg-neutral-50 dark:bg-white/[0.03] border-neutral-300 dark:border-white/10 text-neutral-900 dark:text-white placeholder:text-neutral-500 dark:placeholder:text-white/30 focus-visible:ring-emerald-500"
+                    id="subject"
+                    placeholder="How can we help?"
+                    className="bg-black/30 border-cyan-500/30 text-white placeholder:text-white/50 focus-visible:ring-cyan-500 h-12 rounded-lg backdrop-blur-sm"
                   />
                 </div>
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-neutral-700 dark:text-white/60 mb-1">
-                    Email
-                  </label>
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder="Your email"
-                    className="bg-neutral-50 dark:bg-white/[0.03] border-neutral-300 dark:border-white/10 text-neutral-900 dark:text-white placeholder:text-neutral-500 dark:placeholder:text-white/30 focus-visible:ring-emerald-500"
+                  <Textarea
+                    id="message"
+                    placeholder="Your message"
+                    rows={5}
+                    className="bg-black/30 border-cyan-500/30 text-white placeholder:text-white/50 focus-visible:ring-cyan-500 rounded-lg backdrop-blur-sm resize-none"
                   />
                 </div>
-              </div>
-              <div>
-                <label htmlFor="subject" className="block text-sm font-medium text-neutral-700 dark:text-white/60 mb-1">
-                  Subject
-                </label>
-                <Input
-                  id="subject"
-                  placeholder="How can we help?"
-                  className="bg-neutral-50 dark:bg-white/[0.03] border-neutral-300 dark:border-white/10 text-neutral-900 dark:text-white placeholder:text-neutral-500 dark:placeholder:text-white/30 focus-visible:ring-emerald-500"
-                />
-              </div>
-              <div>
-                <label htmlFor="message" className="block text-sm font-medium text-neutral-700 dark:text-white/60 mb-1">
-                  Message
-                </label>
-                <Textarea
-                  id="message"
-                  placeholder="Your message"
-                  rows={5}
-                  className="bg-neutral-50 dark:bg-white/[0.03] border-neutral-300 dark:border-white/10 text-neutral-900 dark:text-white placeholder:text-neutral-500 dark:placeholder:text-white/30 focus-visible:ring-emerald-500"
-                />
-              </div>
-              <Button
-                type="submit"
-                className="w-full bg-gradient-to-r from-violet-500 to-emerald-500 hover:from-violet-600 hover:to-emerald-600 text-white border-0"
-              >
-                Send Message
-              </Button>
-            </form>
+                <Button
+                  type="submit"
+                  className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white border-0 h-12 rounded-lg font-semibold mt-2"
+                >
+                  Send message
+                </Button>
+              </form>
+            </div>
           </motion.div>
         </div>
       </div>
     </section>
   )
 }
+

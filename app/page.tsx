@@ -60,44 +60,39 @@ export default function LandingPage() {
           description="Join the growing number of professional teams and organizations using Escout to discover top talent."
           logos={[
             {
+              name: "Roma Esports",
+              url: "#",
+              image: "/images/partners/roma.jpg",
+            },
+            {
+              name: "Team Falcons",
+              url: "#",
+              image: "/images/partners/falcon.jpg",
+            },
+            {
+              name: "Inter Esports",
+              url: "#",
+              image: "/images/partners/inter.jpg",
+            },
+            {
+              name: "Team Vitality",
+              url: "#",
+              image: "/images/partners/vitality.jpg",
+            },
+            {
+              name: "Mkers",
+              url: "#",
+              image: "/images/partners/mkers.jpg",
+            },
+            {
               name: "Team Liquid",
               url: "#",
-              image: "/placeholder.svg?height=60&width=120",
+              image: "/images/partners/team_liquid.jpg",
             },
             {
               name: "Cloud9",
               url: "#",
-              image: "/placeholder.svg?height=60&width=120",
-            },
-            {
-              name: "Fnatic",
-              url: "#",
-              image: "/placeholder.svg?height=60&width=120",
-            },
-            {
-              name: "G2 Esports",
-              url: "#",
-              image: "/placeholder.svg?height=60&width=120",
-            },
-            {
-              name: "T1",
-              url: "#",
-              image: "/placeholder.svg?height=60&width=120",
-            },
-            {
-              name: "100 Thieves",
-              url: "#",
-              image: "/placeholder.svg?height=60&width=120",
-            },
-            {
-              name: "TSM",
-              url: "#",
-              image: "/placeholder.svg?height=60&width=120",
-            },
-            {
-              name: "NRG",
-              url: "#",
-              image: "/placeholder.svg?height=60&width=120",
+              image: "/images/partners/cloud9.jpg",
             },
           ]}
         />
@@ -108,35 +103,35 @@ export default function LandingPage() {
             description="Our platform provides all the tools you need to identify, analyze, and recruit the next generation of esports stars."
             features={[
               {
-                icon: <BarChart3 className="h-6 w-6" />,
                 title: "Advanced Analytics",
                 description:
                   "Comprehensive performance metrics and statistics to evaluate player potential with precision.",
+                image: "/images/features/ad_analytics.jpg",
               },
               {
-                icon: <Shield className="h-6 w-6" />,
                 title: "Verified Profiles",
                 description: "All player profiles are verified to ensure authentic and reliable information.",
+                image: "/images/features/ver_profiles.jpg",
               },
               {
-                icon: <Zap className="h-6 w-6" />,
                 title: "AI-Powered Insights",
                 description: "Our proprietary ESV Score uses AI to predict player potential and team compatibility.",
+                image: "/images/features/ai_powered.jpg",
               },
               {
-                icon: <Layers className="h-6 w-6" />,
                 title: "Multi-Game Support",
                 description: "Comprehensive coverage across all major esports titles and emerging games.",
+                image: "/images/features/multi_game.jpg",
               },
               {
-                icon: <RefreshCw className="h-6 w-6" />,
                 title: "Real-time Updates",
                 description: "Stay current with live performance tracking and instant notifications on rising talent.",
+                image: "/images/features/realtime.jpg",
               },
               {
-                icon: <Smartphone className="h-6 w-6" />,
                 title: "Mobile Access",
                 description: "Scout on the go with our fully responsive mobile application and notifications.",
+                image: "/images/features/mobile.jpg",
               },
             ]}
           />
@@ -150,42 +145,42 @@ export default function LandingPage() {
               value: 50000,
               label: "Active Players",
               suffix: "+",
-              icon: <Users className="h-6 w-6" />,
               description: "Talented players showcasing their skills",
+              image: "/images/benefits/active_players.jpg",
             },
             {
               value: 200,
               label: "Pro Teams",
               suffix: "+",
-              icon: <Shield className="h-6 w-6" />,
               description: "Organizations actively scouting talent",
+              image: "/images/benefits/pro_teams.jpg",
             },
             {
               value: 85,
               label: "Placement Rate",
               suffix: "%",
-              icon: <Zap className="h-6 w-6" />,
               description: "Of top-rated players find team opportunities",
+              image: "/images/benefits/placement_rates.jpg",
             },
             {
               value: 15,
               label: "Esports Titles",
               suffix: "+",
-              icon: <Globe className="h-6 w-6" />,
               description: "Across multiple competitive genres",
+              image: "/images/benefits/esports_titles.jpg",
             },
             {
               value: 30,
               label: "Success Stories",
-              icon: <Award className="h-6 w-6" />,
               description: "Players who went from amateur to pro",
+              image: "/images/benefits/success_stories.jpg",
             },
             {
               value: 1000000,
               label: "Matches Analyzed",
               suffix: "+",
-              icon: <BarChart3 className="h-6 w-6" />,
               description: "For accurate performance assessment",
+              image: "/images/benefits/matches_analyzed.jpg",
             },
           ]}
         />
@@ -193,58 +188,36 @@ export default function LandingPage() {
           <TimelineSection
             title="How Escout Works"
             subtitle="The Process"
-            description="Our streamlined approach connects talented players with professional opportunities."
+            description="Our streamlined approach connects talented players with professional opportunities in three simple steps: create your profile, showcase your skills, and get discovered by top teams."
             items={[
               {
-                date: "Step 1",
-                title: "Create Your Profile",
-                description:
-                  "Players create detailed profiles showcasing their skills, experience, and gameplay statistics.",
-                icon: <Flag className="h-5 w-5" />,
-                status: "completed",
+                number: "1",
+                title: "Create Profile",
+                description: "Create your profile and connect your game accounts to automatically import your stats, experience, and match data.",
+                iconImage: "/images/how-it-works/icona_step1.png",
+                backgroundImage: "/images/how-it-works/background_step1.jpg",
+                gradient: "bg-gradient-to-r from-[#00c6ff]/40 to-[#0072ff]/40",
+                numberGradient: "bg-gradient-to-br from-[#00c6ff] to-[#0072ff]",
               },
               {
-                date: "Step 2",
-                title: "Connect Game Accounts",
-                description: "Link your game accounts to automatically import performance data and match history.",
-                icon: <Layers className="h-5 w-5" />,
-                status: "completed",
+                number: "2",
+                title: "Get ESV Score",
+                description: "Get Your ESV Score — our proprietary algorithm analyzes your performance to generate your Esports Scouting Value.",
+                iconImage: "/images/how-it-works/icona_step2.png",
+                backgroundImage: "/images/how-it-works/background_step2.jpg",
+                gradient: "bg-gradient-to-r from-[#7f00ff]/40 to-[#e100ff]/40",
+                numberGradient: "bg-gradient-to-br from-[#7f00ff] to-[#e100ff]",
               },
               {
-                date: "Step 3",
-                title: "Get Your ESV Score",
-                description:
-                  "Our proprietary algorithm analyzes your performance to generate your Esports Scouting Value score.",
-                icon: <BarChart3 className="h-5 w-5" />,
-                status: "completed",
-                highlight: true,
-              },
-              {
-                date: "Step 4",
-                title: "Showcase Your Skills",
-                description:
-                  "Upload highlight reels and participate in Escout-verified tournaments to increase visibility.",
-                icon: <Star className="h-5 w-5" />,
-                status: "completed",
-              },
-              {
-                date: "Step 5",
+                number: "3",
                 title: "Get Discovered",
-                description: "Professional teams and organizations browse profiles and contact promising players.",
-                icon: <CheckCircle className="h-5 w-5" />,
-                status: "current",
-                highlight: true,
-              },
-              {
-                date: "Step 6",
-                title: "Join a Team",
-                description: "Receive offers, negotiate contracts, and begin your professional esports career.",
-                icon: <Award className="h-5 w-5" />,
-                status: "upcoming",
+                description: "Showcase your skills by uploading highlights and joining Escout-verified tournaments, increasing your chances of being discovered by professional teams and organizations.",
+                iconImage: "/images/how-it-works/icona_step3.png",
+                backgroundImage: "/images/how-it-works/background_step3.jpg",
+                gradient: "bg-gradient-to-r from-[#00c6ff]/40 to-[#0072ff]/40",
+                numberGradient: "bg-gradient-to-br from-[#00c6ff] to-[#0072ff]",
               },
             ]}
-            layout="vertical"
-            type="roadmap"
           />
         </div>
         <VideoShowcase
@@ -254,39 +227,12 @@ export default function LandingPage() {
           videos={[
             {
               id: "video-1",
-              title: "Escout Platform Overview",
-              description: "A comprehensive tour of the Escout platform and its key features.",
+              title: "PLAYER SUCCESS STORY: ALEX 'X' ROX",
+              description: "How a talented amateur player got discovered and signed to a professional team through Escout.",
               type: "youtube",
               url: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-              thumbnail: "/placeholder.svg?height=720&width=1280",
+              thumbnail: "/images/video_thumbnail.jpg",
               featured: true,
-            },
-            {
-              id: "video-2",
-              title: "Player Success Story: Alex 'Prodigy' Chen",
-              description:
-                "How a talented amateur player got discovered and signed to a professional team through Escout.",
-              type: "youtube",
-              url: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-              thumbnail: "/placeholder.svg?height=720&width=1280",
-            },
-            {
-              id: "video-3",
-              title: "ESV Score Explained",
-              description:
-                "A deep dive into our proprietary Esports Scouting Value score and how it predicts player potential.",
-              type: "youtube",
-              url: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-              thumbnail: "/placeholder.svg?height=720&width=1280",
-            },
-            {
-              id: "video-4",
-              title: "Team Manager Testimonial",
-              description:
-                "Hear from professional team managers about how Escout has transformed their recruitment process.",
-              type: "youtube",
-              url: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-              thumbnail: "/placeholder.svg?height=720&width=1280",
             },
           ]}
         />
@@ -295,8 +241,8 @@ export default function LandingPage() {
           description="Join thousands of players and teams already using Escout to connect talent with opportunity."
           primaryCta="Get Started"
           secondaryCta="Schedule Demo"
-          primaryCtaLink="https://hh-escout.vercel.app/sign-in"
-          secondaryCtaLink="https://hh-escout.vercel.app/sign-in"
+          primaryCtaLink="/sign-in"
+          secondaryCtaLink="#contact"
         />
         <div id="pricing">
           <PricingSection
@@ -304,6 +250,21 @@ export default function LandingPage() {
             subtitle="Choose Your Plan"
             description="Flexible options for players at every stage of their esports journey."
             tiers={[
+              {
+                name: "Free Plan",
+                price: {
+                  monthly: "free",
+                  yearly: "free",
+                },
+                description: "Start for free and build your profile.",
+                features: [
+                  "Create player profile",
+                  "Basic ESV score",
+                  "Connect 1 game account",
+                  "Access community",
+                ],
+                cta: "Get Started",
+              },
               {
                 name: "Player Basic",
                 price: {
@@ -321,20 +282,19 @@ export default function LandingPage() {
                 cta: "Start Free Trial",
               },
               {
-                name: "Player Pro",
+                name: "Team Plan",
                 price: {
                   monthly: "$19.99",
                   yearly: "$16.99",
                 },
-                description: "For serious players ready to take the next step.",
+                description: "For teams ready to discover and recruit talent.",
                 features: [
-                  "Everything in Basic",
-                  "Advanced ESV score insights",
-                  "Connect unlimited game accounts",
-                  "Upload unlimited highlight reels",
-                  "Priority in search results",
+                  "Advanced player search",
+                  "Detailed ESV insights",
+                  "Unlimited roster management",
+                  "Priority in player discovery",
                   "Performance trend analysis",
-                  "Direct messaging with teams",
+                  "Direct messaging with players",
                 ],
                 cta: "Start Free Trial",
                 highlighted: true,
@@ -354,7 +314,6 @@ export default function LandingPage() {
                 author: "Sarah Johnson",
                 role: "Talent Scout",
                 company: "Apex Esports",
-                avatar: "/placeholder.svg?height=80&width=80",
               },
               {
                 quote:
@@ -362,7 +321,6 @@ export default function LandingPage() {
                 author: "Michael 'Clutch' Chen",
                 role: "Professional Player",
                 company: "Velocity Gaming",
-                avatar: "/placeholder.svg?height=80&width=80",
               },
               {
                 quote:
@@ -370,7 +328,6 @@ export default function LandingPage() {
                 author: "Emily Rodriguez",
                 role: "Team Manager",
                 company: "Dynasty Esports",
-                avatar: "/placeholder.svg?height=80&width=80",
               },
             ]}
           />
