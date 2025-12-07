@@ -88,7 +88,7 @@ export function PricingSection({
             transition={{ duration: 0.6 }}
           >
             <h2 className="text-sm uppercase tracking-widest text-[#39e4ff] mb-3">{subtitle}</h2>
-            <h3 className="text-4xl md:text-5xl font-black mb-6 text-white uppercase">{title}</h3>
+            <h3 className="text-4xl md:text-5xl lg:text-7xl font-black uppercase mb-6 leading-[0.9] text-white">{title}</h3>
             <p className="text-white/60 text-lg mb-8">{description}</p>
 
             <div className="inline-flex items-center p-1 bg-neutral-200/50 dark:bg-white/[0.03] rounded-full border border-neutral-300 dark:border-white/[0.05]">
@@ -145,8 +145,14 @@ export function PricingSection({
                 <div className="flex items-center justify-between mb-6">
                   <div>
                     <h4 className={cn(
-                      "text-4xl font-black uppercase",
-                      tier.name.toLowerCase().includes("pro") ? "text-[#39e4ff]" : tier.name.toLowerCase().includes("basic") ? "text-[#d946ef]" : "text-white"
+                      "text-4xl md:text-5xl font-black uppercase",
+                      tier.name.toLowerCase().includes("pro") || tier.name.toLowerCase().includes("team")
+                        ? "text-[#39e4ff]"
+                        : tier.name.toLowerCase().includes("basic")
+                          ? "text-[#d946ef]"
+                          : tier.name.toLowerCase().includes("free")
+                            ? "text-[#f59e0b]"
+                            : "text-white"
                     )}>{tier.name}</h4>
                     <p className="text-white/70 mt-2 text-sm max-w-[200px]">{tier.description}</p>
                   </div>

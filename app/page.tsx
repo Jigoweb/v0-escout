@@ -205,8 +205,8 @@ export default function LandingPage() {
                 description: "Get Your ESV Score — our proprietary algorithm analyzes your performance to generate your Esports Scouting Value.",
                 iconImage: "/images/how-it-works/icona_step2.png",
                 backgroundImage: "/images/how-it-works/background_step2.jpg",
-                gradient: "bg-gradient-to-r from-[#7f00ff]/40 to-[#e100ff]/40",
-                numberGradient: "bg-gradient-to-br from-[#7f00ff] to-[#e100ff]",
+                gradient: "",
+                numberGradient: "bg-gradient-to-br from-[#6a00ff] to-[#b800ff]",
               },
               {
                 number: "3",

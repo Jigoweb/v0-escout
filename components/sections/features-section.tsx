@@ -53,10 +53,10 @@ export function FeaturesSection({
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            <h2 className="text-sm uppercase tracking-widest text-violet-600 dark:text-violet-400 mb-3">
-              {subtitle}
+            <h2 className="text-sm uppercase tracking-widest text-[#39e4ff] mb-3">
+              DISCOVER TOP TALENT
             </h2>
-            <h3 className="text-3xl md:text-5xl font-bold mb-6 text-white uppercase">{title}</h3>
+            <h3 className="text-4xl md:text-5xl lg:text-7xl font-black uppercase mb-6 leading-[0.9] text-white">{title}</h3>
             <p className="text-neutral-400 text-lg">{description}</p>
           </motion.div>
         </div>
@@ -72,7 +72,7 @@ export function FeaturesSection({
             <motion.div
               key={index}
               variants={itemVariants}
-              className="relative group overflow-hidden rounded-2xl h-[400px]"
+              className="relative group overflow-hidden rounded-2xl h-[280px]"
             >
               {/* Background Image */}
               <Image
@@ -87,11 +87,11 @@ export function FeaturesSection({
               <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-90" />
               
               {/* Content */}
-              <div className="absolute inset-0 p-8 flex flex-col justify-end">
-                <h4 className="text-2xl font-bold mb-3 text-white uppercase tracking-wide drop-shadow-md">
+              <div className="absolute inset-0 p-8 flex flex-col justify-center">
+                <h4 className="text-4xl font-black mb-3 text-white uppercase drop-shadow-md">
                   {feature.title}
                 </h4>
-                <p className="text-neutral-200 text-base leading-relaxed drop-shadow-sm font-light">
+                <p className="text-neutral-200 text-sm leading-relaxed drop-shadow-sm font-medium max-w-[90%]">
                   {feature.description}
                 </p>
               </div>
@@ -102,4 +102,3 @@ export function FeaturesSection({
     </section>
   )
 }
-

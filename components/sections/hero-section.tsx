@@ -77,7 +77,7 @@ export function HeroSection({
               alt="Esports Character Right Back"
               fill
               style={{ objectFit: "contain", objectPosition: "bottom right" }}
-              className="translate-x-[-25%]"
+              className="translate-x-[-25%] translate-y-[6%]"
               quality={90}
             />
           </motion.div>
@@ -87,6 +87,7 @@ export function HeroSection({
               alt="Esports Character Right Front"
               fill
               style={{ objectFit: "contain", objectPosition: "bottom right" }}
+              className=""
               quality={90}
             />
           </motion.div>
@@ -104,7 +105,7 @@ export function HeroSection({
             animate="visible"
             className="flex justify-center mb-8 md:mb-12"
           >
-            <div className="w-[60svw] sm:w-[50svw] md:w-[40svw] lg:w-[30vw] max-w-[800px]">
+            <div className="w-[72svw] sm:w-[60svw] md:w-[50svw] lg:w-[40vw] max-w-[1000px]">
               <Image 
                 src="/images/hero/scritta_unita.png"
                 alt="Discover the Next Esports Star"

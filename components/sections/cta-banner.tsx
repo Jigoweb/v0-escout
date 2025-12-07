@@ -50,10 +50,9 @@ export function CTABanner({
   return (
     <section
       className={cn(
-        "py-24 md:py-32", // Increased padding for hero-like presence
+        "py-12 md:py-16", // Optimized padding
         variantStyles[variant],
         positionStyles[position],
-        // isFloating && "mx-4 md:mx-8 my-8 rounded-2xl", // Removed margins and radius as requested
         className,
       )}
     >
@@ -62,22 +61,18 @@ export function CTABanner({
         <div className="absolute inset-0 z-0">
           {/* Background Image */}
           <div 
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-40 mix-blend-luminosity"
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
             style={{ backgroundImage: "url('/images/banner_background.png')" }}
           />
-          {/* Gradient Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/80 via-blue-600/80 to-purple-600/80 mix-blend-overlay opacity-90" />
-          <div className="absolute inset-0 bg-gradient-to-r from-teal-400/30 to-fuchsia-600/30 mix-blend-color-dodge" />
           {/* Darkening overlay to ensure text readability */}
-          <div className="absolute inset-0 bg-black/20" />
+          <div className="absolute inset-0 bg-black/05" />
         </div>
       )}
 
-      <div className={cn("container relative z-10 mx-auto px-4 md:px-6", isFloating && "max-w-5xl")}>
+      <div className={cn("container relative z-10 mx-auto px-4 md:px-6", isFloating && "max-w-6xl")}>
         <div
           className={cn(
-            "flex flex-col md:flex-row md:items-center",
-            isFloating ? "md:justify-between gap-8" : "justify-between items-center", // Changed to justify-between for hero layout
+            "flex flex-col md:flex-row md:items-center justify-between gap-8",
           )}
         >
           <motion.div
@@ -85,12 +80,12 @@ export function CTABanner({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className={cn("mb-8 md:mb-0", isFloating ? "md:max-w-md" : "md:max-w-3xl md:text-left")}
+            className={cn("w-full md:max-w-3xl text-left")}
           >
             <h2
               className={cn(
-                "font-black text-white mb-4 uppercase leading-none", // Bold styling
-                isFloating ? "text-5xl md:text-7xl" : "text-4xl md:text-6xl"
+                "font-black text-white mb-4 uppercase leading-none",
+                isFloating ? "text-4xl md:text-6xl" : "text-4xl md:text-6xl"
               )}
             >
               {title}
@@ -106,15 +101,13 @@ export function CTABanner({
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
             className={cn(
-              "flex gap-4 shrink-0", // Prevent shrinking
-              isFloating ? "flex-col sm:flex-col items-end" : "flex-col w-full md:w-auto", // Vertical stack on desktop for hero variant
-              !isFloating && "md:ml-8", // Add spacing from text
+              "flex flex-col gap-4 w-full md:w-auto shrink-0 md:min-w-[200px]",
             )}
           >
             <Button
               size="lg"
               className={cn(
-                "bg-cyan-400 hover:bg-cyan-500 text-black font-bold border-0 rounded-full shadow-lg shadow-cyan-500/20 px-8 h-14 text-lg", // Custom styling for primary button
+                "bg-cyan-400 hover:bg-cyan-500 text-black font-bold border-0 rounded-full shadow-lg shadow-cyan-500/20 px-8 h-14 text-lg w-full md:w-auto",
               )}
               asChild
             >
@@ -127,7 +120,7 @@ export function CTABanner({
               <Button
                 size="lg"
                 className={cn(
-                  "bg-cyan-400/90 hover:bg-cyan-500/90 text-black font-bold border-0 rounded-full backdrop-blur-sm px-8 h-14 text-lg", // Matching style for secondary
+                  "bg-cyan-400/90 hover:bg-cyan-500/90 text-black font-bold border-0 rounded-full backdrop-blur-sm px-8 h-14 text-lg w-full md:w-auto",
                 )}
                 asChild
               >

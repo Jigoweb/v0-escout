@@ -32,9 +32,9 @@ export function Footer() {
                 <Image
                   src={logoSrc}
                   alt="Escout Logo"
-                  width={120}
-                  height={40}
-                  className="h-6 w-auto"
+                  width={160}
+                  height={48}
+                  className="h-8 w-auto"
                   priority
                 />
               </div>

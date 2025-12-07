@@ -22,7 +22,7 @@ const config = {
       fontFamily: {
         sans: ['var(--font-sans)', 'system-ui', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'Arial', '"Noto Sans"', 'sans-serif', '"Apple Color Emoji"', '"Segoe UI Emoji"', '"Segoe UI Symbol"', '"Noto Color Emoji"'],
         blackhawk: ['BLACKHAWK', 'sans-serif'],
-        bebas: ['"Bebas Neue"', 'sans-serif'],
+        bebas: ['var(--font-bebas)', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",

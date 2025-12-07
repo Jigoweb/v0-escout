@@ -47,7 +47,7 @@ export default function WhosForSection() {
           {cards.map((card, index) => (
             <div
               key={index}
-              className="group relative h-[450px] rounded-[2rem] overflow-hidden bg-neutral-900 border border-white/5 shadow-2xl transition-transform hover:-translate-y-1 duration-300"
+              className="group relative h-[520px] rounded-2xl overflow-hidden bg-neutral-900 border border-white/5 shadow-2xl transition-transform hover:-translate-y-1 duration-300"
             >
               <Image
                 src={card.image}

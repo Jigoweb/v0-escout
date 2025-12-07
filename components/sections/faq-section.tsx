@@ -58,7 +58,7 @@ export function FAQSection({
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h3 className="text-4xl md:text-5xl font-bold mb-2 text-white uppercase">{title}</h3>
+            <h3 className="text-4xl md:text-5xl lg:text-7xl font-black uppercase mb-6 leading-[0.9] text-white">{title}</h3>
             <p className="text-white/60 text-lg">{description}</p>
           </motion.div>
         </div>
@@ -104,8 +104,8 @@ export function FAQSection({
                        />
                     </div>
                     <h4 className={cn(
-                      "text-lg font-medium transition-colors duration-300",
-                      expandedIndex === index ? "text-[#39e4ff]" : "text-white/80"
+                      "text-2xl font-normal transition-colors duration-300",
+                      expandedIndex === index ? "text-[#39e4ff]" : "text-neutral-400"
                     )}>
                       {faq.question}
                     </h4>

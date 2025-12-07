@@ -61,26 +61,25 @@ export function TestimonialsSection({
             <h2 className="text-sm uppercase tracking-widest text-cyan-400 mb-3">
               {subtitle}
             </h2>
-            <h3 className="text-4xl md:text-5xl font-bold mb-6 text-white uppercase">{title}</h3>
+            <h3 className="text-4xl md:text-5xl lg:text-7xl font-black uppercase mb-6 leading-[0.9] text-white">{title}</h3>
             <p className="text-white/70 text-lg">{description}</p>
           </motion.div>
         </div>
       </div>
 
       {/* Background band below title */}
-      <div className="relative overflow-hidden">
+      <div className="relative overflow-hidden py-12 md:py-24">
         <div className="absolute inset-0 z-0">
           <Image
             src="/images/testimonials_background.jpg"
             alt="Testimonials Background"
             fill
-            className="object-cover opacity-60"
+            className="object-cover"
             quality={90}
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-cyan-900/80 to-purple-900/80 mix-blend-multiply" />
-          <div className="absolute inset-0 bg-black/40" />
+          <div className="absolute inset-0"/>
         </div>
-        <div className="container mx-auto px-4 md:px-6 relative z-10 py-8">
+        <div className="container mx-auto px-4 md:px-6 relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {testimonials.map((testimonial, index) => (
               <motion.div
@@ -89,13 +88,13 @@ export function TestimonialsSection({
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="bg-black/40 backdrop-blur-md border border-white/10 rounded-2xl p-8 relative shadow-xl h-full flex flex-col justify-between"
+                className="bg-black/40 backdrop-blur-md border border-white/10 rounded-2xl p-10 md:p-12 relative shadow-xl h-full flex flex-col justify-between"
               >
                 <div>
                   <p className="text-cyan-100 text-lg mb-8 italic leading-relaxed">&ldquo;{testimonial.quote}&rdquo;</p>
                 </div>
                 <div className="mt-auto">
-                  <h4 className="font-bold text-white text-xl mb-1">{testimonial.author}</h4>
+                  <h4 className="font-bold text-white text-xl mb-1 uppercase font-bebas tracking-wide">{testimonial.author}</h4>
                   <p className="text-cyan-400 text-sm font-medium">
                     {testimonial.role}, {testimonial.company}
                   </p>

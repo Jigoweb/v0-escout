@@ -194,8 +194,8 @@ export function NewsletterSection({
           )}
           <h3
             className={cn(
-              "font-black mb-4 text-white uppercase leading-none",
-              variant === "default" ? "text-5xl md:text-7xl" : "text-3xl",
+              "font-black text-white uppercase mb-6 leading-[0.9]",
+              variant === "default" ? "text-4xl md:text-5xl lg:text-7xl" : "text-3xl",
             )}
           >
             {title}

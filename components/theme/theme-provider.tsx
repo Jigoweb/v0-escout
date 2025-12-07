@@ -28,13 +28,8 @@ export function ThemeProvider({ children, defaultTheme = "dark", storageKey = "t
   const [theme, setTheme] = useState<Theme>(defaultTheme)
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem(storageKey) as Theme | null
-
-    if (savedTheme && (savedTheme === "dark" || savedTheme === "light")) {
-      setTheme(savedTheme)
-    } else {
-      setTheme(defaultTheme)
-    }
+    setTheme("dark")
+    localStorage.setItem(storageKey, "dark")
   }, [defaultTheme, storageKey])
 
   useEffect(() => {

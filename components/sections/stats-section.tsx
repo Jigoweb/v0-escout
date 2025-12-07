@@ -46,7 +46,7 @@ export function StatsSection({
             <h2 className="text-sm uppercase tracking-widest text-cyan-400 mb-3">
               {subtitle}
             </h2>
-            <h3 className="text-3xl md:text-5xl font-bold mb-6 text-white uppercase">{title}</h3>
+            <h3 className="text-4xl md:text-5xl lg:text-7xl font-black uppercase mb-6 leading-[0.9] text-white">{title}</h3>
             <p className="text-neutral-400 text-lg">{description}</p>
           </motion.div>
         </div>
@@ -124,15 +124,13 @@ function StatItem({
             src={stat.image}
             alt={stat.label}
             fill
-            className="object-cover opacity-60 transition-transform duration-700 group-hover:scale-110"
+            className="object-cover transition-transform duration-700 group-hover:scale-110"
           />
         )}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/80 to-purple-900/80 mix-blend-multiply" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
       </div>
 
       <div className="relative z-10 h-full flex flex-col justify-center p-8">
-        <h4 className="text-5xl font-bold text-white mb-2">
+        <h4 className="text-6xl font-bold text-white mb-2">
           {stat.prefix}
           {formattedValue}
           {stat.suffix}

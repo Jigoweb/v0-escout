@@ -59,7 +59,7 @@ export function ContactSection({
             className="border border-purple-500/30 rounded-2xl p-8 md:p-12 relative overflow-hidden bg-black shadow-[0_0_30px_rgba(139,92,246,0.1)] h-full flex flex-col"
           >
             <div className="relative z-10">
-              <h3 className="text-4xl md:text-5xl font-bold mb-4 text-purple-500 uppercase font-sans">{title}</h3>
+              <h3 className="text-4xl md:text-5xl font-bold mb-4 text-purple-500 uppercase font-bebas">{title}</h3>
               <p className="text-neutral-400 text-base mb-1">Have questions about Escout?</p>
               <p className="text-neutral-400 text-base mb-8">Our team is here to help players and organizations connect.</p>
 
@@ -101,11 +101,10 @@ export function ContactSection({
                 fill
                 className="object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-900/80 via-purple-900/60 to-black/40 mix-blend-multiply" />
             </div>
 
             <div className="relative z-10 p-8 md:p-12 h-full flex flex-col">
-              <h3 className="text-4xl md:text-5xl font-bold mb-8 text-white uppercase font-sans">SEND US A MESSAGE</h3>
+              <h3 className="text-4xl md:text-5xl font-bold mb-8 text-white uppercase font-bebas">SEND US A MESSAGE</h3>
               
               <form className="space-y-4 flex-grow">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -154,4 +153,3 @@ export function ContactSection({
     </section>
   )
 }
-

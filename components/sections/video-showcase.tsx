@@ -373,7 +373,7 @@ export function VideoShowcase({
             transition={{ duration: 0.6 }}
           >
             <h2 className="text-sm uppercase tracking-widest text-emerald-400 mb-3">{subtitle}</h2>
-            <h3 className="text-3xl md:text-4xl font-bold mb-6 text-white">{title}</h3>
+            <h3 className="text-4xl md:text-5xl lg:text-7xl font-black uppercase mb-6 leading-[0.9] text-white">{title}</h3>
             <p className="text-white/40 text-lg">{description}</p>
           </motion.div>
         </div>
