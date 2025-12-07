@@ -133,7 +133,7 @@ export function HeroSection({
           >
             <Button
               size="lg"
-              className="bg-cyan-400 hover:bg-cyan-500 text-black font-bold border-0 rounded-full px-8"
+              className="bg-cyan-400 hover:bg-cyan-500 !text-black font-bold border-0 rounded-full px-8"
               asChild
             >
               <a href="https://hh-escout.vercel.app/sign-in">
