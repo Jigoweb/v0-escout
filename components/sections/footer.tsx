@@ -140,7 +140,7 @@ export function Footer() {
           </p>
           <div className="flex flex-wrap justify-center gap-6 text-sm">
             <Link
-              href="/Escout.gg_Privacy_policy.pdf"
+              href="/privacy-policy"
               target="_blank"
               rel="noopener noreferrer"
               className="text-white/40 hover:text-white transition-colors"
@@ -148,7 +148,7 @@ export function Footer() {
               Privacy Policy
             </Link>
             <Link
-              href="/Escout.gg_Terms_of_service.pdf"
+              href="/terms-of-service"
               target="_blank"
               rel="noopener noreferrer"
               className="text-white/40 hover:text-white transition-colors"
@@ -156,7 +156,7 @@ export function Footer() {
               Terms of Service
             </Link>
             <Link
-              href="/Escout.gg_Cookie_policy.pdf"
+              href="/cookie-policy"
               target="_blank"
               rel="noopener noreferrer"
               className="text-white/40 hover:text-white transition-colors"
