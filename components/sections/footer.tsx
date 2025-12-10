@@ -62,16 +62,54 @@ export function Footer() {
               Platform
             </h4>
             <ul className="space-y-3">
-              {["Features", "Games", "How It Works", "Pricing", "Success Stories", "FAQ"].map((item) => (
-                <li key={item}>
-                  <Link
-                    href="#"
-                    className="text-white/50 hover:text-white transition-colors text-sm"
-                  >
-                    {item}
-                  </Link>
-                </li>
-              ))}
+              <li>
+                <Link
+                  href="#features"
+                  className="text-white/50 hover:text-white transition-colors text-sm"
+                >
+                  Features
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="#"
+                  className="text-white/50 hover:text-white transition-colors text-sm"
+                >
+                  Games
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="#how-it-works"
+                  className="text-white/50 hover:text-white transition-colors text-sm"
+                >
+                  How It Works
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="#pricing"
+                  className="text-white/50 hover:text-white transition-colors text-sm"
+                >
+                  Pricing
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="#testimonials"
+                  className="text-white/50 hover:text-white transition-colors text-sm"
+                >
+                  Success Stories
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="#faq"
+                  className="text-white/50 hover:text-white transition-colors text-sm"
+                >
+                  FAQ
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -101,15 +139,30 @@ export function Footer() {
             &copy; {currentYear} Escout. All rights reserved.
           </p>
           <div className="flex flex-wrap justify-center gap-6 text-sm">
-            {["Privacy Policy", "Terms of Service", "Cookie Policy"].map((link) => (
-              <Link
-                key={link}
-                href="#"
-                className="text-white/40 hover:text-white transition-colors"
-              >
-                {link}
-              </Link>
-            ))}
+            <Link
+              href="/Escout.gg_Privacy_policy.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white/40 hover:text-white transition-colors"
+            >
+              Privacy Policy
+            </Link>
+            <Link
+              href="/Escout.gg_Terms_of_service.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white/40 hover:text-white transition-colors"
+            >
+              Terms of Service
+            </Link>
+            <Link
+              href="/Escout.gg_Cookie_policy.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white/40 hover:text-white transition-colors"
+            >
+              Cookie Policy
+            </Link>
           </div>
         </div>
       </div>
