@@ -227,10 +227,10 @@ export default function LandingPage() {
           videos={[
             {
               id: "video-1",
-              title: "PLAYER SUCCESS STORY: ALEX 'X' ROX",
-              description: "How a talented amateur player got discovered and signed to a professional team through Escout.",
+              title: "THE $70M ESPORTS WORLD CUP 2025 RECAP",
+              description: "Quickshot takes you through the biggest moments of EWC 25 - 7 weeks of intense esports competition with a $70M prize pool across 25 tournaments, featuring celebrities, showmatches, and unforgettable stories.",
               type: "youtube",
-              url: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+              url: "https://www.youtube.com/embed/7iJmvBS3b34",
               thumbnail: "/images/video_thumbnail.jpg",
               featured: true,
             },
